@@ -13,14 +13,15 @@
 After eight years since the first release of jMetal, we have decided it's time to make a deep redesign of the
 software. Some of the ideas we are elaborating are:
 
+* Architecture redesign to provide a simpler design while keeping the same functionality.
+* Improve code quality:
+ * Application of unit testing
+ * Better use of Java features (e.g, generics)
+ * Design patterns
+ * Application of clean code guidelines - “Clean code: A Handbook of Agile Software Craftsmanship" (Robert C. Martin)
+* Algorithm templates
+* Parallelism support
 * Maven is used as the tool for development, testing, packaging and deployment.
-* Redesigned the architecture to provide a simpler design while keeping the same functionality.
-* Improve the code quality:
-* 
- ** We plan to incorporate progressively unit tests to all the classes
- ** We take into account the recommendations provided in “Clean code: A Handbook of Agile Software Craftsmanship" (Robert C. Martin)
- ** The Fluent Interface (http://martinfowler.com/bliki/FluentInterface.html) is applied to configure and execute
-    the algorithms.
 
 <div id='id-features'/>
 ##New Features
