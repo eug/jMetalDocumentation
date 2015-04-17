@@ -16,6 +16,7 @@ software. Some of the ideas we are elaborating are:
 * Maven is used as the tool for development, testing, packaging and deployment.
 * Redesigned the architecture to provide a simpler design while keeping the same functionality.
 * Improve the code quality:
+* 
  ** We plan to incorporate progressively unit tests to all the classes
  ** We take into account the recommendations provided in “Clean code: A Handbook of Agile Software Craftsmanship" (Robert C. Martin)
  ** The Fluent Interface (http://martinfowler.com/bliki/FluentInterface.html) is applied to configure and execute
