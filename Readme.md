@@ -6,7 +6,7 @@
 This site contains documentation of the latest version of jMetal (version 5.0), which is currenly under development in https://github.com/jMetal/jMetal 
 
 ## Table of contents
-- [Overview](overview.md)
+- [Introduction](introduction.md)
 - [Installation](installation.md)
 - [Architecture](architecture.md)
 - [Components](components.md) 
