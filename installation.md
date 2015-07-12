@@ -24,6 +24,6 @@ And advantage of having a project in GitHub is that you can easly get a copy of 
 git clone https://github.com/jMetal/jMetal.git
 ```
 * Selecting the button "Clone in Desktop" that is localed in the right side of the page in https://github.com/jMetal/jMetal
+* Alternatively, you can download a Zip file with all the files by pushing the buttton "Download ZIP" in th same page
 
-
-
+Once you have the source code, you use you favourite IDE to import (Eclipse) or open (Intellij Idea) the project as a Maven project, or merely open it (Netbeans).
