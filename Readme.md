@@ -17,7 +17,7 @@ software. Some of the ideas we are elaborating are:
 * Maven is used as the tool for development, testing, packaging and deployment.
 
 ## Table of contents
-- [Overview](Overview.md)
-- [Installation](#id-installation)
-- [Architecture](#id-architecture)
-- [Components](#id-components) 
+- [Overview](overview.md)
+- [Installation](installation.md)
+- [Architecture](architecture.md)
+- [Components](components.md) 
