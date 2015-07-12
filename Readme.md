@@ -21,3 +21,4 @@ software. Some of the ideas we are elaborating are:
 - [Installation](installation.md)
 - [Architecture](architecture.md)
 - [Components](components.md) 
+- <a href="overview.md">Testing features</a>
