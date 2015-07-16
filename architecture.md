@@ -1,4 +1,6 @@
 <div id='id-architecture'/>
 ##Architecture
 
-Architecture section ....
+The architecture of jMetal 5.0 relies on four interfaces: 
+
+https://github.com/jMetal/jMetalDocumentation/blob/master/figures/jMetal5CoreClassDiagram.png
