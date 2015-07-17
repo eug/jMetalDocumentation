@@ -8,6 +8,7 @@ This site contains documentation of the latest version of jMetal (version 5.0), 
 ## Table of contents
 - [1. Introduction](introduction.md)
 - [2. Installation](installation.md)
-- [3. Compiling and Running](running.md)
-- [4. Architecture](architecture.md)
+- [ 2.1. Compiling](compiling.md)
+- [ 2.2. Running](compiling.md)
+- [3. Architecture](architecture.md)
 - [Components](components.md) 
