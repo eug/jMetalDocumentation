@@ -7,7 +7,6 @@ This site contains documentation of the latest version of jMetal (version 5.0), 
 
 ## Table of contents
 1. [Introduction](introduction.md)
-2. [Maven package structure](maven.md)
 2. [Installation](installation.md)
   1. [Compiling](compiling.md)
   2. [Running programs](running.md)
