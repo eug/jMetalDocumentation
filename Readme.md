@@ -9,7 +9,7 @@ This site contains documentation of the latest version of jMetal (version 5.0), 
 - [1. Introduction](introduction.md)
 - [2. Installation](installation.md)
 - [ 2.1. Compiling](compiling.md)
-- [ 2.2. Running](running.md)
+- [ 2.2. Running programs](running.md)
 - [3. Architecture](architecture.md)
 - [ 3.1. The `Solution` interface]()
 - [ 3.2. The `Operator` interface]()
