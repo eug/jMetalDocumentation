@@ -8,7 +8,7 @@ of metaheuristics and, hence, in the quality of the obtained results.
 
 The following figure depicts the basic components that are used for representing solutions in jMetal 5:
 ![The Solution Interface](https://github.com/jMetal/jMetalDocumentation/blob/master/figures/jMetal5SolutionClassDiagram.png)
-where three representations are included: binary, real, and integer. By using this approach, many implementations can be provided for the same encoding, adding an extra degree of flexibility.
+where three representations are included: binary, real, and integer. By using this approach, many implementations can be provided for the same encoding, adding an extra degree of flexibility. The use of generics also allows that an attempt to incorrectly assign the value of a variable results in a compilation error, e.g., trying to assign to an int variable the variable value of a `DoubleSolution`.
 
 The code of the `Solution` interface is shown next:
 ```java
