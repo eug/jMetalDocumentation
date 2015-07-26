@@ -95,9 +95,9 @@ which contains an implementation to all the methods in `Solution`. This class is
 
 
 ### Solution attributes
-The idea of incorporating attributes is to allow algorithm to add specific fields to solutions. For example, NSGA-II requires to rank the solutions and assign them the value of the crowding distance. 
+The idea of incorporating attributes is to allow to add specific fields to solutions that are needed by some algorithms. For example, NSGA-II requires to rank the solutions and assign them the value of the crowding distance, while SPEA2 assigns a raw fitness to the solutions.
 
-To avoid having to manage directly the solution attributes, we include this utility interface:
+The attributes manipulated directly, but we include also this utility interface:
 ```java
 package org.uma.jmetal.util.solutionattribute;
 /**
@@ -144,6 +144,17 @@ public class GenericSolutionAttribute <S extends Solution<?>, V> implements Solu
 Note that in the current implementation the `getAttributedID()` returns a class identifier. This means that we cannot have two different attributes of the same class. 
 
 ### Example of attribute: constraints
+Optimization problems can have side constraints, and this implies that evaluating a solution requires to compute the objective functions and also the constraints to apply some kind of constraint handling mechanism. In jMetal 5 solution attributes are used to incorporate constraint information into the solutions.
+
+The default constraint handling mechanism in jMetal is the overall constraing violation scheme defined in NSGA-II, so the following class is provided:
+
+```java
+package org.uma.jmetal.util.solutionattribute.impl;
+public class OverallConstraintViolation<S extends Solution<?>> extends GenericSolutionAttribute<S, Double> {
+}
+```
+It is an empty class extending `GenericSolutionAttribute` specifying a double value for the attribute. 
+
 
 ### Example of attribute: ranking
 
