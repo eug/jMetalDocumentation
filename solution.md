@@ -77,7 +77,7 @@ public interface IntegerDoubleSolution extends Solution<Number> {
   public int getNumberOfDoubleVariables() ;
 }
 ```
-### Implemengint solutions
+### Implementing solutions
 Once we have defined a set of interfaces for the different solutions, we provide default implementions to all of them. Our approach is to take as starting point an abstract class named `AbstractGenericSolution`:
 ```java
 package org.uma.jmetal.solution.impl;
