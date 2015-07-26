@@ -12,6 +12,8 @@ where three representations are included: binary, real, and integer. By using th
 
 The code of the `Solution` interface is shown next:
 ```java
+package org.uma.jmetal.solution;
+
 public interface Solution<T> extends Serializable {
   public void setObjective(int index, double value) ;
   public double getObjective(int index) ;
@@ -23,12 +25,6 @@ public interface Solution<T> extends Serializable {
   public int getNumberOfVariables() ;
   public int getNumberOfObjectives() ;
 
-  public double getOverallConstraintViolationDegree() ;
-  public void setOverallConstraintViolationDegree(double violationDegree) ;
-
-  public int getNumberOfViolatedConstraints() ;
-  public void setNumberOfViolatedConstraints(int numberOfViolatedConstraints) ;
-
   public Solution<T> copy() ;
 
   public void setAttribute(Object id, Object value) ;
@@ -36,5 +32,72 @@ public interface Solution<T> extends Serializable {
 }
 ```
 
+The interface has methods for accessing both the variables and the objectives of a solution, a copy method, and to methods for accessing solution atributes.
 
+### Solution attributes
+The idea of incorporating attributes is to allow algorithm to add specific fields to solutions. For example, NSGA-II requires to rank the solutions and assign them the value of the crowding distance. 
 
+To avoid having to manage directly the solution attributes, we include this utility interface:
+```java
+package org.uma.jmetal.util.solutionattribute;
+/**
+ * Attributes allows to extend the {@link Solution} classes to incorporate data required by
+ * operators or algorithms manipulating them.
+ *
+ * @author Antonio J. Nebro <antonio@lcc.uma.es>
+ */
+public interface SolutionAttribute <S extends Solution<?>, V> {
+  public void setAttribute(S solution, V value) ;
+  public V getAttribute(S solution) ;
+  public Object getAttributeID() ;
+}
+```
+
+and a defafult implementation:
+```java
+package org.uma.jmetal.util.solutionattribute.impl;
+
+/**
+ * Generic class for implementing {@link SolutionAttribute} classes
+ *
+ * @author Antonio J. Nebro <antonio@lcc.uma.es>
+ */
+public class GenericSolutionAttribute <S extends Solution<?>, V> implements SolutionAttribute<S, V>{
+
+  @SuppressWarnings("unchecked")
+  @Override
+  public V getAttribute(S solution) {
+    return (V)solution.getAttribute(getAttributeID());
+  }
+
+  @Override
+  public void setAttribute(S solution, V value) {
+     solution.setAttribute(getAttributeID(), value);
+  }
+
+  @Override
+  public Object getAttributeID() {
+    return this.getClass() ;
+  }
+}
+```
+Note that in the current implementation the `getAttributedID()` returns a class identifier. This means that we cannot have two different attributes of the same class. 
+
+### Example of attribute: constraints
+
+### Example of attribute: ranking
+
+The use of solution attributes can be encapsulated. As an
+example, we have defined the following interface to assign a
+rank to a solution (i.e, NSGA-II’s ranking):
+public interface Ranking<S extends Solution>
+extends SolutionAttribute<S, Integer>{
+public Ranking computeRanking(List<S> solutionList) ;
+public List<S> getSubfront(int rank) ;
+public int getNumberOfSubfronts() ;
+}
+so a client class (e.g., the NSGAII class) can merely use:
+Ranking ranking = computeRanking(jointPopulation);
+This way, the solution attribute is managed internally by
+the class implementing the ranking and is hidden to the
+metaheuristic.
