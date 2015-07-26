@@ -32,15 +32,13 @@ public interface Solution<T> extends Serializable {
 }
 ```
 
-The interface has methods for accessing both the variables and the objectives of a solution, a copy method, and to methods for accessing solution atributes. Defining a particular encoding implies implementing or extending this interface. This way, the interfaces for solutions having a list of double and integer variables are defined as follows:
+The interface has methods for accessing both the variables and the objectives of a solution, a copy method, and to methods for accessing solution atributes. 
+
+### Defining encodings
+Defining a particular encoding implies implementing or extending the `Solution` interface. This way, the interfaces for solutions having a list of double and integer variables are defined as follows:
 ```java
 package org.uma.jmetal.solution;
 
-/**
- * Interface representing a double solutions
- *
- * @author Antonio J. Nebro <antonio@lcc.uma.es>
- */
 public interface DoubleSolution extends Solution<Double> {
   public Double getLowerBound(int index) ;
   public Double getUpperBound(int index) ;
@@ -49,44 +47,29 @@ public interface DoubleSolution extends Solution<Double> {
 ```java 
 package org.uma.jmetal.solution;
 
-/**
- * Interface representing a integer solutions
- *
- * @author Antonio J. Nebro <antonio@lcc.uma.es>
- */
 public interface IntegerSolution extends Solution<Integer> {
   public Integer getLowerBound(int index) ;
   public Integer getUpperBound(int index) ;
 }
 ``` 
-These interfaces extend `Solution` with methods for getting the lower and upper bounds of the double and integer variables. The way of setting those values are left to the implementation classes.
+These interfaces provide for getting the lower and upper bounds of the double and integer variables. The way of setting those values are left to the implementation classes.
 
 In the case of a binary solution, the interface is: 
 ```java
 import org.uma.jmetal.util.binarySet.BinarySet;
 
-/**
- * Interface representing a binary (bitset) solutions
- *
- * @author Antonio J. Nebro <antonio@lcc.uma.es>
- */
 public interface BinarySolution extends Solution<BinarySet> {
   public int getNumberOfBits(int index) ;
   public int getTotalNumberOfBits() ;
 }
 ```
 
-assuming that this interface represents a list of binary variables.
+assuming that we intend to represent a list of binary variables.
 
 The adopted approach allows to define encodings having mixed variables. For exammple, this interfce defines solutions composed of lists of double and integer values:
 ```java
 package org.uma.jmetal.solution;
 
-/**
- * Interface representing a solution composed of integers and real values
- *
- * @author Antonio J. Nebro <antonio@lcc.uma.es>
- */
 public interface IntegerDoubleSolution extends Solution<Number> {
   public Number getLowerBound(int index) ;
   public Number getUpperBound(int index) ;
@@ -94,6 +77,21 @@ public interface IntegerDoubleSolution extends Solution<Number> {
   public int getNumberOfDoubleVariables() ;
 }
 ```
+### Implemengint solutions
+Once we have defined a set of interfaces for the different solutions, we provide default implementions to all of them. Our approach is to take as starting point an abstract class named `AbstractGenericSolution`:
+```java
+package org.uma.jmetal.solution.impl;
+
+public abstract class AbstractGenericSolution<T, P extends Problem<?>> implements Solution<T> {
+  private double[] objectives;
+  private List<T> variables;
+  protected P problem ;
+  protected double overallConstraintViolationDegree ;
+  protected int numberOfViolatedConstraints ;
+  protected Map<Object, Object> attributes ;
+  protected final JMetalRandom randomGenerator ;
+```
+which contains an implementation to all the methods in `Solution`. This class is extended by all the solution implementations in jMetal 5: `DefaultBinarySolution`, `DefaultIntegerSolution`, `DefaultDoubleSolution`, `DefaultIntegerDoubleSolution`, `DefaultIntegerPermutationSolution`, and `DefaultDoubleBinarySolution`. 
 
 
 ### Solution attributes
@@ -115,7 +113,7 @@ public interface SolutionAttribute <S extends Solution<?>, V> {
 }
 ```
 
-and a defafult implementation:
+and a default implementation:
 ```java
 package org.uma.jmetal.util.solutionattribute.impl;
 
