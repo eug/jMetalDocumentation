@@ -117,11 +117,6 @@ and a default implementation:
 ```java
 package org.uma.jmetal.util.solutionattribute.impl;
 
-/**
- * Generic class for implementing {@link SolutionAttribute} classes
- *
- * @author Antonio J. Nebro <antonio@lcc.uma.es>
- */
 public class GenericSolutionAttribute <S extends Solution<?>, V> implements SolutionAttribute<S, V>{
 
   @SuppressWarnings("unchecked")
@@ -205,17 +200,28 @@ This code includes also another attribute, called `NumberOfViolatedConstraints` 
 
 ### Example of attribute: ranking
 
-The use of solution attributes can be encapsulated. As an
-example, we have defined the following interface to assign a
+The use of solution attributes can be encapsulated. As an example, we have defined the following interface to assign a
 rank to a solution (i.e, NSGA-II’s ranking):
-public interface Ranking<S extends Solution>
-extends SolutionAttribute<S, Integer>{
-public Ranking computeRanking(List<S> solutionList) ;
-public List<S> getSubfront(int rank) ;
-public int getNumberOfSubfronts() ;
+```java
+package org.uma.jmetal.util.solutionattribute;
+
+import java.util.List;
+
+/**
+ * Ranks a list of solutions according to the dominance relationship
+ *
+ * @author Antonio J. Nebro <antonio@lcc.uma.es>
+ */
+public interface Ranking<S extends Solution<?>> extends SolutionAttribute<S, Integer>{
+  public Ranking<S> computeRanking(List<S> solutionList) ;
+  public List<S> getSubfront(int rank) ;
+  public int getNumberOfSubfronts() ;
 }
-so a client class (e.g., the NSGAII class) can merely use:
+```
+
+so that a client class (e.g., the `NSGAII` class) can merely use:
+```java
 Ranking ranking = computeRanking(jointPopulation);
-This way, the solution attribute is managed internally by
-the class implementing the ranking and is hidden to the
+```
+This way, the solution attribute is managed internally by the class implementing the ranking and is hidden to the
 metaheuristic.
