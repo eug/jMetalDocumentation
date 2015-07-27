@@ -117,24 +117,79 @@ R2 (N)          : 0.13179198315493879
 R2              : 0.13179198315493879
 Error ratio     : 1.0
 ```
+
+The results tagged with `(N)` indicates that the fronts are normalized before being computed.
+
+
 ### Running an algorithm from the command line
 If you plan to run a jMetal algorithm from the command line you have to take into account the following requirements:
 
 1. Build the project with `mvn package`. This will create, for each subproject (i.e, `jmetal-core`, `jmetal-problem`, `jmetal-algorithm`, and `jmetal-exec`), a jar file with all the dependences.
 2. Add the needed jar files to the class. For example, if you are want to test an algorithm on a benchmark problem all the jars will required. You have at least two ways of doing it. One is to set the `CLASSPATH` environment variable:
 
-  ```
-   export CLASSPATH=jmetal-core/target/jmetal-core-5.0-jar-with-dependencies.jar:jmetal-problem/target/jmetal-problem-5.0-jar-with-dependencies.jar:jmetal-exec/target/jmetal-exec-5.0-jar-with-dependencies.jar:jmetal-problem/target/jmetal-problem-5.0-jar-with-dependencies.jar
-  ```
+```
+export CLASSPATH=jmetal-core/target/jmetal-core-5.0-jar-with-dependencies.jar:jmetal-problem/target/jmetal-problem-5.0-jar-with-dependencies.jar:jmetal-exec/target/jmetal-exec-5.0-jar-with-dependencies.jar:jmetal-problem/target/jmetal-problem-5.0-jar-with-dependencies.jar
+```
   
   Then you can execute an algorithm this way (we are going to execute NSGA-II):
   
-  ```
-  java org.uma.jmetal.runner.multiobjective.NSGAIIRunner 
-  ```
-3. The other alterntive is to add the jars to the `java` command:
+```
+java org.uma.jmetal.runner.multiobjective.NSGAIIRunner 
+```
+3. The other alternative is to add the jars to the `java` command:
   
  ```
 java -cp jmetal-exec/target/jmetal-exec-5.0-SNAPSHOT-jar-with-dependencies.jar:jmetal-core/target/jmetal-core-5.0-SNAPSHOT-jar-with-dependencies.jar:jmetal-problem/target/jmetal-problem-5.0-SNAPSHOT-jar-with-dependencies.jar:jmetal-algorithm/target/jmetal-algorithm-5.0-Beta-35-jar-with-dependencies.jar org.uma.jmetal.runner.multiobjective.NSGAIIRunner
  ```
+ 
+ This example execute NSGA-II with the default parameters. If you want to solve a given problem its class name must be provided as an argument. For example, to solve the benchmark problem `ZDT4` the command would be:
+ 
+ ```
+ java org.uma.jmetal.runner.multiobjective.NSGAIIRunner org.uma.jmetal.problem.multiobjective.zdt.ZDT4
+ ```
+ 
+and the output will be similar to this:
+```
+jul 27, 2015 6:48:27 PM org.uma.jmetal.runner.multiobjective.NSGAIIRunner main
+INFORMACIÓN: Total execution time: 683ms
+jul 27, 2015 6:48:27 PM org.uma.jmetal.runner.AbstractAlgorithmRunner printFinalSolutionSet
+INFORMACIÓN: Random seed: 1438015706581
+jul 27, 2015 6:48:27 PM org.uma.jmetal.runner.AbstractAlgorithmRunner printFinalSolutionSet
+INFORMACIÓN: Objectives values have been written to file FUN.tsv
+jul 27, 2015 6:48:27 PM org.uma.jmetal.runner.AbstractAlgorithmRunner printFinalSolutionSet
+INFORMACIÓN: Variables values have been written to file VAR.tsv
+```
+ 
+In the case of problems having a known Pareto front (or a Pareto front approximation), adding the file containing it allows to apply the available quality indicators to the obtained front. This way, the command to solve ZDT4 would be:
+```
+java org.uma.jmetal.runner.multiobjective.NSGAIIRunner org.uma.jmetal.problem.multiobjective.zdt.ZDT4 jmetal-problem/src/test/resources/pareto_fronts/ZDT4.pf
+```
+and this would be output:
+```
+jul 27, 2015 6:49:21 PM org.uma.jmetal.runner.multiobjective.NSGAIIRunner main
+INFORMACIÓN: Total execution time: 598ms
+jul 27, 2015 6:49:21 PM org.uma.jmetal.runner.AbstractAlgorithmRunner printFinalSolutionSet
+INFORMACIÓN: Random seed: 1438015760471
+jul 27, 2015 6:49:21 PM org.uma.jmetal.runner.AbstractAlgorithmRunner printFinalSolutionSet
+INFORMACIÓN: Objectives values have been written to file FUN.tsv
+jul 27, 2015 6:49:21 PM org.uma.jmetal.runner.AbstractAlgorithmRunner printFinalSolutionSet
+INFORMACIÓN: Variables values have been written to file VAR.tsv
+jul 27, 2015 6:49:21 PM org.uma.jmetal.runner.AbstractAlgorithmRunner printQualityIndicators
+INFORMACIÓN: 
+Hypervolume (N) : 0.6584874391103687
+Hypervolume     : 0.658491021119803
+Epsilon (N)     : 0.014508161683056214
+Epsilon         : 0.014508161681605389
+GD (N)          : 1.7281971372005978E-4
+GD              : 1.7281858245371445E-4
+IGD (N)         : 1.9833943989483466E-4
+IGD             : 1.9833851420211548E-4
+IGD+ (N)        : 0.00425088535021156
+IGD+            : 0.004250860866635309
+Spread (N)      : 0.4449171015114183
+Spread          : 0.44491700055639544
+R2 (N)          : 0.13208551920620412
+R2              : 0.13208472309027727
+Error ratio     : 1.0
+```
 
