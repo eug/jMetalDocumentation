@@ -36,3 +36,23 @@ polynomial mutation (real encoding) and bit-flip mutation (binary encoding).
 * Selection. This kind of operator is used for performing the selection procedures in many metaheuristics. An
 example of selection operator is the binary tournament.
 * LocalSearch. This class is intended for representing local search procedures. It contains a  method for consulting how many evaluations have been performed after been applied.
+
+We review the interfaces and implementations of these operators next.
+
+### Crossover operators
+The `CrossoverOperator` interface represents any crossover in jMetal 5:
+```java
+package org.uma.jmetal.operator;
+
+/**
+ * Interface representing crossover operators. They will receive a list of solutions and return
+ * another list of solutions
+ *
+ * @author Antonio J. Nebro <antonio@lcc.uma.es>
+ *
+ * @param <S> The class of the solutions
+ */
+public interface CrossoverOperator<S extends Solution<?>> extends Operator<List<S>,List<S>> {
+}
+```
+This interface simply states that a crossover has as a source a list of `Solution` objects and return as a result another list of solutions.
