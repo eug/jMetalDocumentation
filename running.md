@@ -117,4 +117,13 @@ R2 (N)          : 0.13179198315493879
 R2              : 0.13179198315493879
 Error ratio     : 1.0
 ```
-### Running and algorithm from the command line
+### Running an algorithm from the command line
+If you plan to run a jMetal algorithm from the command line you have to take into account the following requirements:
+
+1. Build the project with `mvn package`. This will create, for each subproject (i.e, `jmetal-core`, `jmetal-problem`, `jmetal-algorithm`, and `jmetal-exec`) a jar file with all the dependences.
+2. Add the needed jar files to the class. For example, if you are want to test an algorithm on a benchmark problem all the jars will required. You have at least two ways of doing it:
+  1. Setting the `CLASSPATH` environment variable
+  ```
+   export CLASSPATH=jmetal-core/target/jmetal-core-5.0-jar-with-dependencies.jar:jmetal-problem/target/jmetal-problem-5.0-jar-with-dependencies.jar:jmetal-exec/target/jmetal-exec-5.0-jar-with-dependencies.jar:jmetal-problem/target/jmetal-problem-5.0-jar-with-dependencies.jar
+  ```
+  2. Adding the jars to the `java` command.
