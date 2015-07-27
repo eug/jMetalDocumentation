@@ -1,1 +1,2 @@
-## Interface `Algorithm`
+## The `Algorithm` interface
+
