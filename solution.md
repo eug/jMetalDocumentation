@@ -153,8 +153,55 @@ package org.uma.jmetal.util.solutionattribute.impl;
 public class OverallConstraintViolation<S extends Solution<?>> extends GenericSolutionAttribute<S, Double> {
 }
 ```
-It is an empty class extending `GenericSolutionAttribute` specifying a double value for the attribute. 
+It is an empty class extending `GenericSolutionAttribute` specifying a double value for the attribute. Typically, the constraints are evaluted in the class defining the problem as is shown in this example:
+```java
+package org.uma.jmetal.problem.multiobjective;
 
+/** Class representing problem Binh2 */
+public class Binh2 extends AbstractDoubleProblem implements ConstrainedProblem<DoubleSolution> {
+  public OverallConstraintViolation<DoubleSolution> overallConstraintViolationDegree ;
+  public NumberOfViolatedConstraints<DoubleSolution> numberOfViolatedConstraints ;
+  /**
+   * Constructor
+   * Creates a default instance of the Binh2 problem
+   */
+  public Binh2() {
+    ...
+    overallConstraintViolationDegree = new OverallConstraintViolation<DoubleSolution>() ;
+    numberOfViolatedConstraints = new NumberOfViolatedConstraints<DoubleSolution>() ;
+  }
+
+  /** Evaluate() method */
+  @Override
+  public void evaluate(DoubleSolution solution) {
+     ...
+  }
+
+  /** EvaluateConstraints() method */
+  @Override
+  public void evaluateConstraints(DoubleSolution solution)  {
+    double[] constraint = new double[this.getNumberOfConstraints()];
+
+    double x0 = solution.getVariableValue(0) ;
+    double x1 = solution.getVariableValue(1) ;
+
+    constraint[0] = -1.0 * (x0 - 5) * (x0 - 5) - x1 * x1 + 25.0;
+    constraint[1] = (x0 - 8) * (x0 - 8) + (x1 + 3) * (x1 + 3) - 7.7;
+
+    double overallConstraintViolation = 0.0;
+    int violatedConstraints = 0;
+    for (int i = 0; i < this.getNumberOfConstraints(); i++) {
+      if (constraint[i] < 0.0) {
+        overallConstraintViolation += constraint[i];
+        violatedConstraints++;
+      }
+    }
+
+    overallConstraintViolationDegree.setAttribute(solution, overallConstraintViolation);
+    numberOfViolatedConstraints.setAttribute(solution, violatedConstraints);
+  }
+```
+This code includes also another attribute, called `NumberOfViolatedConstraints` that is used to set the number of violated constraints of a given solution.
 
 ### Example of attribute: ranking
 
