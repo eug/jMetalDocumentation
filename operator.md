@@ -55,4 +55,64 @@ package org.uma.jmetal.operator;
 public interface CrossoverOperator<S extends Solution<?>> extends Operator<List<S>,List<S>> {
 }
 ```
-This interface simply states that a crossover has as a source a list of `Solution` objects and return as a result another list of solutions.
+This interface simply states that a crossover has as a source a list of `Solution` objects and return as a result another list of solutions. Let us examine two implementations of this interface, one for double solutons and another one for binary solutions. 
+
+The simulated binary crossover (SBX) is the default crossover operator in many multiobjective evolutionary algorithms (e.g., NSGA-II, SPEA2, SMS-EMOA, MOCell, etc). A scheme of the `SBXCrossover` class is shown next:
+```java
+package org.uma.jmetal.operator.impl.crossover;
+
+/**
+ * This class allows to apply a SBX crossover operator using two parent solutions (Double encoding).
+ * A {@link RepairDoubleSolution} object is used to decide the strategy to apply when a value is out
+ * of range.
+ *
+ * The implementation is based on the NSGA-II code available in
+ * <a href="http://www.iitk.ac.in/kangal/codes.shtml">http://www.iitk.ac.in/kangal/codes.shtml</a>
+ *
+ * @author Antonio J. Nebro <antonio@lcc.uma.es>
+ * @author Juan J. Durillo
+ */
+public class SBXCrossover implements CrossoverOperator<DoubleSolution> {
+  /** EPS defines the minimum difference allowed between real values */
+  private static final double EPS = 1.0e-14;
+
+  private double distributionIndex ;
+  private double crossoverProbability  ;
+  private RepairDoubleSolution solutionRepair ;
+
+  private JMetalRandom randomGenerator ;
+
+  /** Constructor */
+  public SBXCrossover(double crossoverProbability, double distributionIndex) {
+    this (crossoverProbability, distributionIndex, new RepairDoubleSolutionAtBounds()) ;
+  }
+
+  /** Constructor */
+  public SBXCrossover(double crossoverProbability, double distributionIndex, RepairDoubleSolution solutionRepair) {
+    if (crossoverProbability < 0) {
+      throw new JMetalException("Crossover probability is negative: " + crossoverProbability) ;
+    } else if (distributionIndex < 0) {
+      throw new JMetalException("Distribution index is negative: " + distributionIndex);
+    }
+
+    this.crossoverProbability = crossoverProbability ;
+    this.distributionIndex = distributionIndex ;
+    this.solutionRepair = solutionRepair ;
+
+    randomGenerator = JMetalRandom.getInstance() ;
+  }
+
+  /** Execute() method */
+  @Override
+  public List<DoubleSolution> execute(List<DoubleSolution> solutions) {
+    if (null == solutions) {
+      throw new JMetalException("Null parameter") ;
+    } else if (solutions.size() != 2) {
+      throw new JMetalException("There must be two parents instead of " + solutions.size()) ;
+    }
+
+    return doCrossover(crossoverProbability, solutions.get(0), solutions.get(1)) ;
+  }
+  
+  ...
+```
