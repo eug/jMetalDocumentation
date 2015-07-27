@@ -11,7 +11,7 @@ This site contains documentation of the latest version of jMetal (version 5.0), 
   1. [Compiling](compiling.md)
   2. [Running programs](running.md)
 3. [Architecture](architecture.md)
- 1. [The `Solution` interface]()
+ 1. [The `Solution` interface](solution.md)
  2. [The `Operator` interface]()
  3. [The `Problem` interface]()
  4. [The `Algorithm` interface]()
