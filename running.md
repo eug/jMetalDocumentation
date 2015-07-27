@@ -13,10 +13,19 @@ For example, in the case of NSGA-II we include up to 5 runners:
 * `NSGAIIMeasures`: similar to `NSGAIIRunner`, but it includes examples of how to use measures.
 * `ParallelNSGAII`: as `NSGAIIRunner` but configured to use threads to evaluate the populations in parallel.
 
-We describe next the `NSGAIIRunner` class. The first part of the class is for declaring the types of the problem to solve (a problem dealing with `DoubleSolution` individuals) and the operators. The `referenceParetoFront` is used to indicate optionally the name of a reference front:
+We describe next the `NSGAIIRunner` class. The Javadoc comment indicate the program parameters: the first one is the class of the problem to solve and, optionally, a reference front file name can be given. In that case, the reference front will be used to compute all the quality indicators available:
 ```java
 public class NSGAIIRunner extends AbstractAlgorithmRunner {
+  /**
+   * @param args Command line arguments.
+   * @throws JMetalException
+   * @throws FileNotFoundException
+   * Invoking command: java org.uma.jmetal.runner.multiobjetive.NSGAIIRunner problemName [referenceFront]
+   */
   public static void main(String[] args) throws JMetalException, FileNotFoundException {
+```
+The first part of the `main` method is for declaring the types of the problem to solve (a problem dealing with `DoubleSolution` individuals) and the operators. The `referenceParetoFront` is used to indicate the name of the optional reference front:
+```jaava
     Problem<DoubleSolution> problem;
     Algorithm<List<DoubleSolution>> algorithm;
     CrossoverOperator<DoubleSolution> crossover;
@@ -37,8 +46,7 @@ The next group of sentences are for processing the program arguments. A benchmar
       referenceParetoFront = "jmetal-problem/src/test/resources/pareto_fronts/ZDT1.pf" ;
     }
 ```
-Next the problem is loaded from its name:
-
+Next the problem is loaded from its class name:
 ```java
     problem = ProblemUtils.<DoubleSolution> loadProblem(problemName);
 ```
@@ -60,8 +68,7 @@ Then the parameters and the algorithm are configured:
         .setPopulationSize(100)
         .build() ;
 ```
-
-The last step is to run the algorithm and to print the obtained solutions and optionally the values of all the available quality indicators:
+The last step is to run the algorithm and to write the obtained solutions into two files and optionally to print the values of all the available quality indicators:
 ```java
     AlgorithmRunner algorithmRunner = new AlgorithmRunner.Executor(algorithm)
         .execute() ;
@@ -78,6 +85,6 @@ The last step is to run the algorithm and to print the obtained solutions and op
   }
 ```
 
-
-### Configuring and running an algorithm from an IDE
-This is the easiest way to proceed. The first step is to 
+### Running an algorithm from an IDE
+Once you have configured your algorithm you can use your favorite IDE to execute them. For example, in the case of IntellJ Idea you can select the runner class name and select the option "Run 'NSGAIIRunner.main()'" clicking with the left mouse button if you intend to run NSGA-II:
+![Running with IntellJ Idea](https://github.com/jMetal/jMetalDocumentation/blob/master/figures/runningNSGAIIRunnerInIntelliJIdea.png)
