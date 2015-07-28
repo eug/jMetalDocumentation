@@ -24,8 +24,8 @@ public class NSGAIIRunner extends AbstractAlgorithmRunner {
    */
   public static void main(String[] args) throws JMetalException, FileNotFoundException {
 ```
-The first part of the `main` method is for declaring the types of the problem to solve (a problem dealing with `DoubleSolution` individuals) and the operators. The `referenceParetoFront` is used to indicate the name of the optional reference front:
-```jaava
+The first part of the `main` method declares the type of the problem to solve (a problem dealing with `DoubleSolution` individuals in this example) and the operators. The `referenceParetoFront` is used to indicate the name of the optional reference front:
+```java
     Problem<DoubleSolution> problem;
     Algorithm<List<DoubleSolution>> algorithm;
     CrossoverOperator<DoubleSolution> crossover;
@@ -33,7 +33,7 @@ The first part of the `main` method is for declaring the types of the problem to
     SelectionOperator<List<DoubleSolution>, DoubleSolution> selection;
     String referenceParetoFront = "" ;
 ```
-The next group of sentences parse the program arguments. A benchmark problem (ZDT1 in the example) is solved by default:
+The next group of sentences parse the program arguments. A benchmark problem (ZDT1 in the example) is solved by default when no arguments are indicated:
 ``` java
     String problemName ;
     if (args.length == 1) {
