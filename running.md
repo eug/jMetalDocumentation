@@ -50,7 +50,7 @@ Next, the problem is loaded from its class name:
 ```java
     problem = ProblemUtils.<DoubleSolution> loadProblem(problemName);
 ```
-Then, the parameters and the algorithm are configured:
+Then, the operators and the algorithm are configured:
 ```java 
     double crossoverProbability = 0.9 ;
     double crossoverDistributionIndex = 20.0 ;
