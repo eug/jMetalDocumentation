@@ -68,7 +68,7 @@ Then, the operators and the algorithm are configured:
         .setPopulationSize(100)
         .build() ;
 ```
-The last step is to run the algorithm and to write the obtained solutions into two files; optionally, it can also print the values of all the available quality indicators:
+The last step is to run the algorithm and to write the obtained solutions into two files: one for the variable values and one for the objective values; optionally, it can also print the values of all the available quality indicators for the computed results:
 ```java
     AlgorithmRunner algorithmRunner = new AlgorithmRunner.Executor(algorithm)
         .execute() ;
