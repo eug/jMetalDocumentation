@@ -1,19 +1,19 @@
 ## Running algorihtms
-To run an algorithm in jMetal you have two choices: using an IDE or using the command line. We explain both methods in this section. We comment first how configure a metaheuristic to solve a problem.
+To run an algorithm in jMetal you have two choices: using an IDE or using the command line. We explain both methods in this section. We comment first how to configure a metaheuristic algorithm to solve a problem.
 
 ### Configuring algorithms
-In jMetal 5 the only to configure an algorithm is to write a class for that purpose; we refer to those classes as runners. Doing that from an external configuration file is a issue belonging to the todo list of the next release.
+In jMetal 5, the only way to configure an algorithm is to write a class for that purpose; we refer to such a class as runner. Configuring an algorithm from an external configuration file is a issue belonging to the todo list of the next release.
 
-We provide at least a runner algorithm. They can be found in the `jmetal-exec` module, in folder https://github.com/jMetal/jMetal/tree/master/jmetal-exec/src/main/java/org/uma/jmetal/runner/multiobjective. 
+We provide at least a runner class for each algorithm provided by the framework. They can be found in the `jmetal-exec` module, in the folder https://github.com/jMetal/jMetal/tree/master/jmetal-exec/src/main/java/org/uma/jmetal/runner/multiobjective. 
 
-For example, in the case of NSGA-II we include up to 5 runners:
+As explanatory examples, we include five different runners for the NSGA-II algorithm, showing different ways of configuring and using it:
 * `NSGAIIRunner`: configuration of the standard NSGA-II to solve continuous problems.
 * `NSGAIIInteger`: configuration to solve integer problems.
 * `NSGAIIBinary`: configuration to solve binary problems.
 * `NSGAIIMeasures`: similar to `NSGAIIRunner`, but it includes examples of how to use measures.
 * `ParallelNSGAII`: as `NSGAIIRunner` but configured to use threads to evaluate the populations in parallel.
 
-We describe next the `NSGAIIRunner` class. The Javadoc comment indicate the program parameters: the first one is the class of the problem to solve and, optionally, a reference front file name can be given. In that case, the reference front will be used to compute all the quality indicators available:
+We describe next the `NSGAIIRunner` class. The Javadoc comment indicates the program parameters: the first one is the class of the problem to solve and, optionally, a reference front file name can be given. In that case, the reference front will be used to compute all the quality indicators available:
 ```java
 public class NSGAIIRunner extends AbstractAlgorithmRunner {
   /**
@@ -33,7 +33,7 @@ The first part of the `main` method is for declaring the types of the problem to
     SelectionOperator<List<DoubleSolution>, DoubleSolution> selection;
     String referenceParetoFront = "" ;
 ```
-The next group of sentences are for processing the program arguments. A benchmark problem is solved by default:
+The next group of sentences parse the program arguments. A benchmark problem (ZDT1 in the example) is solved by default:
 ``` java
     String problemName ;
     if (args.length == 1) {
@@ -46,11 +46,11 @@ The next group of sentences are for processing the program arguments. A benchmar
       referenceParetoFront = "jmetal-problem/src/test/resources/pareto_fronts/ZDT1.pf" ;
     }
 ```
-Next the problem is loaded from its class name:
+Next, the problem is loaded from its class name:
 ```java
     problem = ProblemUtils.<DoubleSolution> loadProblem(problemName);
 ```
-Then the parameters and the algorithm are configured:
+Then, the parameters and the algorithm are configured:
 ```java 
     double crossoverProbability = 0.9 ;
     double crossoverDistributionIndex = 20.0 ;
@@ -68,7 +68,7 @@ Then the parameters and the algorithm are configured:
         .setPopulationSize(100)
         .build() ;
 ```
-The last step is to run the algorithm and to write the obtained solutions into two files and optionally to print the values of all the available quality indicators:
+The last step is to run the algorithm and to write the obtained solutions into two files; optionally, it can also print the values of all the available quality indicators:
 ```java
     AlgorithmRunner algorithmRunner = new AlgorithmRunner.Executor(algorithm)
         .execute() ;
@@ -89,7 +89,7 @@ The last step is to run the algorithm and to write the obtained solutions into t
 Once you have configured your algorithm you can use your favorite IDE to execute them. For example, in the case of IntellJ Idea you can select the runner class name and select the option "Run 'NSGAIIRunner.main()'" clicking with the left mouse button if you intend to run NSGA-II:
 ![Running with IntellJ Idea](https://github.com/jMetal/jMetalDocumentation/blob/master/figures/runningNSGAIIRunnerInIntelliJIdea.png)
 
-As as result of the execution, the following messages are printed into the output console:
+As a result of the execution, the following messages are printed into the output console:
 ```
 jul 27, 2015 4:21:59 PM org.uma.jmetal.runner.multiobjective.NSGAIIRunner main
 INFORMACIÓN: Total execution time: 1147ms
@@ -118,14 +118,14 @@ R2              : 0.13179198315493879
 Error ratio     : 1.0
 ```
 
-The results tagged with `(N)` indicates that the fronts are normalized before being computed.
+The results tagged with `(N)` indicate that the fronts are normalized before computing the quality indicator.
 
 
 ### Running an algorithm from the command line
 If you plan to run a jMetal algorithm from the command line you have to take into account the following requirements:
 
 1. Build the project with `mvn package`. This will create, for each subproject (i.e, `jmetal-core`, `jmetal-problem`, `jmetal-algorithm`, and `jmetal-exec`), a jar file with all the dependences.
-2. Add the needed jar files to the class. For example, if you are want to test an algorithm on a benchmark problem all the jars will required. You have at least two ways of doing it. One is to set the `CLASSPATH` environment variable:
+2. Indicate java the location of these jar files. You have at least two ways of doing it. One is to set the  `CLASSPATH` environment variable:
 
 ```
 export CLASSPATH=jmetal-core/target/jmetal-core-5.0-jar-with-dependencies.jar:jmetal-problem/target/jmetal-problem-5.0-jar-with-dependencies.jar:jmetal-exec/target/jmetal-exec-5.0-jar-with-dependencies.jar:jmetal-problem/target/jmetal-problem-5.0-jar-with-dependencies.jar
@@ -136,7 +136,7 @@ export CLASSPATH=jmetal-core/target/jmetal-core-5.0-jar-with-dependencies.jar:jm
 ```
 java org.uma.jmetal.runner.multiobjective.NSGAIIRunner 
 ```
-3. The other alternative is to add the jars to the `java` command:
+3. The other alternative is to add class search path where these jar file are located to the `java` command using the `-cp` or `-classpath` options:
   
  ```
 java -cp jmetal-exec/target/jmetal-exec-5.0-SNAPSHOT-jar-with-dependencies.jar:jmetal-core/target/jmetal-core-5.0-SNAPSHOT-jar-with-dependencies.jar:jmetal-problem/target/jmetal-problem-5.0-SNAPSHOT-jar-with-dependencies.jar:jmetal-algorithm/target/jmetal-algorithm-5.0-Beta-35-jar-with-dependencies.jar org.uma.jmetal.runner.multiobjective.NSGAIIRunner
