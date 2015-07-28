@@ -136,7 +136,7 @@ export CLASSPATH=jmetal-core/target/jmetal-core-5.0-jar-with-dependencies.jar:jm
 ```
 java org.uma.jmetal.runner.multiobjective.NSGAIIRunner 
 ```
-3. The other alternative is to add class search path where these jar file are located to the `java` command using the `-cp` or `-classpath` options:
+3. The other alternative is to indicate the location of these jar files using the `-cp` or `-classpath` options of the `java` command:
   
  ```
 java -cp jmetal-exec/target/jmetal-exec-5.0-SNAPSHOT-jar-with-dependencies.jar:jmetal-core/target/jmetal-core-5.0-SNAPSHOT-jar-with-dependencies.jar:jmetal-problem/target/jmetal-problem-5.0-SNAPSHOT-jar-with-dependencies.jar:jmetal-algorithm/target/jmetal-algorithm-5.0-Beta-35-jar-with-dependencies.jar org.uma.jmetal.runner.multiobjective.NSGAIIRunner
