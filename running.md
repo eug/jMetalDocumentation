@@ -4,7 +4,7 @@ To run an algorithm in jMetal you have two choices: using an IDE or using the co
 ### Configuring algorithms
 In jMetal 5, the only way to configure an algorithm is to write a class for that purpose; we refer to such a class as runner. Configuring an algorithm from an external configuration file is a issue belonging to the todo list of the next release.
 
-We provide at least a runner class for each algorithm provided by the framework. They can be found in the `jmetal-exec` module, in the folder https://github.com/jMetal/jMetal/tree/master/jmetal-exec/src/main/java/org/uma/jmetal/runner/multiobjective. 
+We provide at least a runner class for each algorithm included in jMetal. They can be found in the `jmetal-exec` module, in the folder https://github.com/jMetal/jMetal/tree/master/jmetal-exec/src/main/java/org/uma/jmetal/runner/multiobjective. 
 
 As explanatory examples, we include five different runners for the NSGA-II algorithm, showing different ways of configuring and using it:
 * `NSGAIIRunner`: configuration of the standard NSGA-II to solve continuous problems.
