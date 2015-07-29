@@ -46,7 +46,7 @@ The next group of sentences parse the program arguments. A benchmark problem (ZD
       referenceParetoFront = "jmetal-problem/src/test/resources/pareto_fronts/ZDT1.pf" ;
     }
 ```
-Next, the problem is loaded from its class name:
+Next, the problem is loaded using its class name:
 ```java
     problem = ProblemUtils.<DoubleSolution> loadProblem(problemName);
 ```
@@ -68,7 +68,7 @@ Then, the operators and the algorithm are configured:
         .setPopulationSize(100)
         .build() ;
 ```
-The last step is to run the algorithm and to write the obtained solutions into two files: one for the variable values and one for the objective values; optionally, it can also print the values of all the available quality indicators for the computed results:
+The last step is to run the algorithm and to write the obtained solutions into two files: one for the variable values and one for the objective values; optionally, if a reference front has been provided it also prints the values of all the available quality indicators for the computed results:
 ```java
     AlgorithmRunner algorithmRunner = new AlgorithmRunner.Executor(algorithm)
         .execute() ;
@@ -86,7 +86,7 @@ The last step is to run the algorithm and to write the obtained solutions into t
 ```
 
 ### Running an algorithm from an IDE
-Once you have configured your algorithm you can use your favorite IDE to execute them. For example, in the case of IntellJ Idea you can select the runner class name and select the option "Run 'NSGAIIRunner.main()'" clicking with the left mouse button if you intend to run NSGA-II:
+Once you have configured your algorithm, you can use your favorite IDE to execute them. For example, in the case of IntellJ Idea you can select the runner class name and select the option "Run 'NSGAIIRunner.main()'" clicking with the left mouse button if you intend to run NSGA-II:
 ![Running with IntellJ Idea](https://github.com/jMetal/jMetalDocumentation/blob/master/figures/runningNSGAIIRunnerInIntelliJIdea.png)
 
 As a result of the execution, the following messages are printed into the output console:
@@ -122,7 +122,7 @@ The results tagged with `(N)` indicate that the fronts are normalized before com
 
 
 ### Running an algorithm from the command line
-If you plan to run a jMetal algorithm from the command line you have to take into account the following requirements:
+If you plan to run a jMetal algorithm from the command line, you have to take into account the following requirements:
 
 1. Build the project with `mvn package`. This will create, for each subproject (i.e, `jmetal-core`, `jmetal-problem`, `jmetal-algorithm`, and `jmetal-exec`), a jar file with all the dependences.
 2. Indicate java the location of these jar files. You have at least two ways of doing it. One is to set the  `CLASSPATH` environment variable:
@@ -142,7 +142,7 @@ java org.uma.jmetal.runner.multiobjective.NSGAIIRunner
 java -cp jmetal-exec/target/jmetal-exec-5.0-SNAPSHOT-jar-with-dependencies.jar:jmetal-core/target/jmetal-core-5.0-SNAPSHOT-jar-with-dependencies.jar:jmetal-problem/target/jmetal-problem-5.0-SNAPSHOT-jar-with-dependencies.jar:jmetal-algorithm/target/jmetal-algorithm-5.0-Beta-35-jar-with-dependencies.jar org.uma.jmetal.runner.multiobjective.NSGAIIRunner
  ```
  
- This example execute NSGA-II with the default parameters. If you want to solve a given problem its class name must be provided as an argument. For example, to solve the benchmark problem `ZDT4` the command would be:
+ This example executes NSGA-II with the default parameters. If you want to solve a given problem its class name must be provided as an argument. For example, to solve the benchmark problem `ZDT4` the command would be:
  
  ```
  java org.uma.jmetal.runner.multiobjective.NSGAIIRunner org.uma.jmetal.problem.multiobjective.zdt.ZDT4
