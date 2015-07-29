@@ -13,7 +13,7 @@ As explanatory examples, we include five different runners for the NSGA-II algor
 * `NSGAIIMeasures`: similar to `NSGAIIRunner`, but it includes examples of how to use measures.
 * `ParallelNSGAII`: as `NSGAIIRunner` but configured to use threads to evaluate the populations in parallel.
 
-We describe next the `NSGAIIRunner` class. The Javadoc comment indicates the program parameters: the first one is the class of the problem to solve and, optionally, a reference front file name can be given. In that case, the reference front will be used to compute all the quality indicators available:
+We describe next the `NSGAIIRunner` class. The Javadoc comment indicates the program parameters: the first one is the class of the problem to solve; the second one, is an optional parameter, indicating the path to a file containing a reference front. This front is an approximation to the optimal Pareto front of the problem to be solved, and in case of being provided, it will be used to compute all the quality indicators available:
 ```java
 public class NSGAIIRunner extends AbstractAlgorithmRunner {
   /**
