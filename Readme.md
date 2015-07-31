@@ -19,4 +19,4 @@ This site contains documentation of the latest version of jMetal (version 5.0), 
 5. [Quality indicators]()
 
 
-[Javadoc](https://github.com/jMetal/jMetalDocumentation/blob/master/apidocs/index.html)
+[Javadoc](http://jmetal.github.io/jMetal/apidocs/index.html)
