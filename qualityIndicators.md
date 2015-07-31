@@ -80,4 +80,4 @@ Then, the `evaluate` method computes the indicator value by using the reference 
   }
 ```
 
-Readers interested in how the Epsilon is computed can find all the code here: https://github.com/jMetal/jMetal/blob/master/jmetal-core/src/main/java/org/uma/jmetal/qualityindicator/impl/Epsilon.java
+Readers interested in how the Epsilon is computed can find all the code [here]( https://github.com/jMetal/jMetal/blob/master/jmetal-core/src/main/java/org/uma/jmetal/qualityindicator/impl/Epsilon.java)
