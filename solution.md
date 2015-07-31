@@ -109,7 +109,7 @@ List<Solution<Double>> doublePopulation ;
 List<BinarySolucion> binaryPopulation ;
 ```
 
-An utility class called (`SolutionListUtils`)[https://github.com/jMetal/jMetal/blob/master/jmetal-core/src/main/java/org/uma/jmetal/util/SolutionListUtils.java] offers a set of operations over solution lists, such as finding the best/worst solution, selecting solutions randomly, etc.
+An utility class called [`SolutionListUtils`](https://github.com/jMetal/jMetal/blob/master/jmetal-core/src/main/java/org/uma/jmetal/util/SolutionListUtils.java) offers a set of operations over solution lists, such as finding the best/worst solution, selecting solutions randomly, etc.
 
 ### Solution attributes
 The idea of incorporating attributes is to allow to add specific fields to solutions that are needed by some algorithms. For example, NSGA-II requires to rank the solutions and assign them the value of the crowding distance, while SPEA2 assigns a raw fitness to the solutions.
