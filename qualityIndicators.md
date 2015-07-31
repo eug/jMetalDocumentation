@@ -28,7 +28,7 @@ Before describing how quality indicators are implemented, we must comment before
 
 ### An example of indicator: Epsilon
 
-To illustrate how most of the indicators are implemented in jMetal 5, we describe next the code of the Epsilon indicator.
+To illustrate a quality indicator in jMetal 5, we describe next the code of the Epsilon indicator.
 
 The declaration of the Epsilon class is included in this piece of code: 
 ```java
@@ -62,3 +62,22 @@ Our approach to implement most of indicators is to consider that most of them re
   }
 ...
 ```
+
+Then, the `evaluate` method computes the indicator value by using the reference front:
+```java
+  /**
+   * Evaluate() method
+   *
+   * @param solutionList
+   * @return
+   */
+  @Override public Double evaluate(Evaluate solutionList) {
+    if (solutionList == null) {
+      throw new JMetalException("The pareto front approximation list is null") ;
+    }
+
+    return epsilon(new ArrayFront(solutionList), referenceParetoFront);
+  }
+```
+
+Readers interested in how the Epsilon is computed can find all the code here: https://github.com/jMetal/jMetal/blob/master/jmetal-core/src/main/java/org/uma/jmetal/qualityindicator/impl/Epsilon.java
