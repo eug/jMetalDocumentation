@@ -17,6 +17,4 @@ This site contains documentation of the latest version of jMetal (version 5.0), 
  4. [The `Algorithm` interface](algorithm.md)
 4. [Algorithm templates]()
 5. [Quality indicators]()
-
-
-[Javadoc](http://jmetal.github.io/jMetal/apidocs/index.html)
+6. [Javadoc](http://jmetal.github.io/jMetal/apidocs/index.html)
