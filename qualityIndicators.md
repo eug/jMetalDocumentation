@@ -23,8 +23,8 @@ The idea is than every quality indicator is applied to some entity (`Evaluate`) 
 
 ### Auxiliary classes
 Before describing how quality indicators are implemented, we must comment before a number of auxiliary classes that are used:
-* The `Front` interface and `ArrayFront` class: Frequently, a reference Pareto front is stored in a file containing the objective values of a number of solutions. A `Front` is an entity intended to store the contents of these files; in the case of the `ArrayFront` class, it stores the front into an array of points.
-* The `FrontNormalizer` class: many indicators normalize the list of solutions to be evaluated, and this class is intended to do this: given a reference front or the maximum and minimum values, it returns a normalized list of solutions.
+* The [`Front`](https://github.com/jMetal/jMetal/blob/master/jmetal-core/src/main/java/org/uma/jmetal/util/front/Front.java) interface and (`ArrayFront`)[https://github.com/jMetal/jMetal/blob/master/jmetal-core/src/main/java/org/uma/jmetal/util/front/imp/ArrayFront.java] class: Frequently, a reference Pareto front is stored in a file containing the objective values of a number of solutions. A `Front` is an entity intended to store the contents of these files; in the case of the `ArrayFront` class, it stores the front into an array of points.
+* The [`FrontNormalizer`](https://github.com/jMetal/jMetal/blob/master/jmetal-core/src/main/java/org/uma/jmetal/util/front/util/FrontNormalizer.java) class: many indicators normalize the list of solutions to be evaluated, and this class is intended to do this: given a reference front or the maximum and minimum values, it returns a normalized list of solutions.
 
 ### An example of indicator: Epsilon
 
