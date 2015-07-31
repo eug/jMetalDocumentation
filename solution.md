@@ -93,6 +93,23 @@ public abstract class AbstractGenericSolution<T, P extends Problem<?>> implement
 ```
 which contains an implementation to all the methods in `Solution`. This class is extended by all the solution implementations in jMetal 5: `DefaultBinarySolution`, `DefaultIntegerSolution`, `DefaultDoubleSolution`, `DefaultIntegerDoubleSolution`, `DefaultIntegerPermutationSolution`, and `DefaultDoubleBinarySolution`. 
 
+### Where are the populations?
+
+In jMetal 5 there is not any class to represent the concept of population. Instead, a Java `List` of `Solution` objects is used.
+
+Some examples:
+``` java
+/* A population of double solutions */
+List<DoubleSolution> doublePopulation ;
+
+/* The same population using the generic interface */
+List<Solution<Double>> doublePopulation ;
+
+/* A population of binary solutions */
+List<BinarySolucion> binaryPopulation ;
+```
+
+An utility class called (`SolutionListUtils`)[https://github.com/jMetal/jMetal/blob/master/jmetal-core/src/main/java/org/uma/jmetal/util/SolutionListUtils.java] offers a set of operations over solution lists, such as finding the best/worst solution, selecting solutions randomly, etc.
 
 ### Solution attributes
 The idea of incorporating attributes is to allow to add specific fields to solutions that are needed by some algorithms. For example, NSGA-II requires to rank the solutions and assign them the value of the crowding distance, while SPEA2 assigns a raw fitness to the solutions.
