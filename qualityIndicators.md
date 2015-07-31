@@ -21,6 +21,11 @@ public interface QualityIndicator<Evaluate, Result> extends DescribedEntity {
 
 The idea is than every quality indicator is applied to some entity (`Evaluate`) to be evaluated, and it returns a `Result`. The use of generics allows to represent indicators returning anything, from a double value (the most usual return type) to a pair of values as in the case of our implementation of Set Coverage. The quality indicators also has an associated name.
 
+### Auxiliary classes
+Before describing how quality indicators are implemented, we must comment before a number of auxiliary classes that are used:
+* The `Front` interface and `ArrayFront` class: Frequently, a reference Pareto front is stored in a file containing the objective values of a number of solutions. A `Front` is an entity intended to store the contents of these files; in the case of the `ArrayFront` class, it stores the front into an array of points.
+* The `FrontNormalizer` class: many indicators normalize the list of solutions to be evaluated, and this class is intended to do this: given a reference front or the maximum and minimum values, it returns a normalized list of solutions.
+
 ### An example of indicator: Epsilon
 
 To illustrate how most of the indicators are implemented in jMetal 5, we describe next the code of the Epsilon indicator.
@@ -31,6 +36,29 @@ public class Epsilon<Evaluate extends List<? extends Solution<?>>>
     extends SimpleDescribedEntity
     implements QualityIndicator<Evaluate,Double> {
   ...    
-}
+
 ```
-Although at a first glance it can seem a very complex declaration, it simply states that `Evaluate` must be a List of any kind of jMetal `Solution`, so any attempt to use the indicator with a non compatible object will be detected at compiling time. 
+Although at a first glance it seems a very complex declaration, it simply states that `Evaluate` must be a List of any kind of jMetal `Solution`, so any attempt to use the indicator with a non compatible object will be detected at compiling time. 
+
+Our approach to implement most of indicators is to consider that most of them require a reference front to be computed, so that front must be incorporated as a parameter of the class constructor: 
+
+```java
+  private Front referenceParetoFront ;
+
+  /**
+   * Constructor
+   *
+   * @param referenceParetoFrontFile
+   * @throws FileNotFoundException
+   */
+  public Epsilon(String referenceParetoFrontFile) throws FileNotFoundException {
+    super("EP", "Epsilon quality indicator") ;
+    if (referenceParetoFrontFile == null) {
+      throw new JMetalException("The reference pareto front is null");
+    }
+
+    Front front = new ArrayFront(referenceParetoFrontFile);
+    referenceParetoFront = front ;
+  }
+...
+```
