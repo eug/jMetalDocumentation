@@ -125,6 +125,7 @@ where indicator name can be:
 * `GD`: Generational distance
 * `IGD`: Inverted generational distance
 * `IGD+`: Inverted generational distance plus
+* `EP`: Epsilon
 * `HV`: Hypervolume
 * `SPREAD`: Spread (two objectives)
 * `GSPREAD`: Generalized spread (more than two objectives
