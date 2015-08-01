@@ -112,3 +112,6 @@ double hvValue = hypervolume.evaluate(population) ;
 
 ###Discussion
 Leaving the normalization up to the user can be error prone, but there is a performance advantage: if the same indicator has to be applied to many solution lists, the normalization of the reference front is carried out only once. This is the case, for example, when some indicator-based algorithms have to find the solution contributing the least to the Hypervolume.
+
+### Computing quality indicators from the command line
+If you need to compute the value of a given quality indicator of a front of solutions from the command line you can use the [`CommandLineIndicatorRunner`](https://github.com/jMetal/jMetal/blob/master/jmetal-exec/src/main/java/org/uma/jmetal/qualityIndicator/CommandLineIndicatorRunner.java) class.
