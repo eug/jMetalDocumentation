@@ -115,3 +115,10 @@ Leaving the normalization up to the user can be error prone, but there is a perf
 
 ### Computing quality indicators from the command line
 If you need to compute the value of a given quality indicator of a front of solutions from the command line you can use the [`CommandLineIndicatorRunner`](https://github.com/jMetal/jMetal/blob/master/jmetal-exec/src/main/java/org/uma/jmetal/qualityIndicator/CommandLineIndicatorRunner.java) class.
+
+The usage of this program is:
+```
+java org.uma.jmetal.qualityIndicator.CommandLineIndicatorRunner 
+```
+
+TO BE COMPLETED
