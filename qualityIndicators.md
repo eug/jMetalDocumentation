@@ -118,7 +118,19 @@ If you need to compute the value of a given quality indicator of a front of solu
 
 The usage of this program is:
 ```
-java org.uma.jmetal.qualityIndicator.CommandLineIndicatorRunner 
+java org.uma.jmetal.qualityIndicator.CommandLineIndicatorRunner indicatorName referenceFront frontToEvaluate TRUE | FALSE
 ```
+
+where indicator name can be:
+* `GD`: Generational distance
+* `IGD`: Inverted generational distance
+* `IGD+`: Inverted generational distance plus
+* `HV`: Hypervolume
+* `SPREAD`: Spread (two objectives)
+* `GSPREAD`: Generalized spread (more than two objectives
+* `ER`: Error ratio
+* `ALL`: Select all the available indicators
+
+The last parameter is used to indicate whether the fronts are to be normalized or not computing the quality indicators.
 
 TO BE COMPLETED
