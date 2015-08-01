@@ -134,4 +134,42 @@ where indicator name can be:
 
 The last parameter is used to indicate whether the fronts are to be normalized or not computing the quality indicators.
 
-TO BE COMPLETED
+We include some examples next. First, we run NSGA-II to solve problem [`ZDT2`](https://github.com/jMetal/jMetal/blob/jmetal-5.0/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/zdt/ZDT2.java):
+```
+$ java org.uma.jmetal.runner.multiobjective.NSGAIIRunner org.uma.jmetal.problem.multiobjective.zdt.ZDT2
+
+ago 01, 2015 6:08:16 PM org.uma.jmetal.runner.multiobjective.NSGAIIRunner main
+INFORMACIÓN: Total execution time: 1445ms
+ago 01, 2015 6:08:17 PM org.uma.jmetal.runner.AbstractAlgorithmRunner printFinalSolutionSet
+INFORMACIÓN: Random seed: 1438445295477
+ago 01, 2015 6:08:17 PM org.uma.jmetal.runner.AbstractAlgorithmRunner printFinalSolutionSet
+INFORMACIÓN: Objectives values have been written to file FUN.tsv
+ago 01, 2015 6:08:17 PM org.uma.jmetal.runner.AbstractAlgorithmRunner printFinalSolutionSet
+INFORMACIÓN: Variables values have been written to file VAR.tsv
+```
+
+Now we use `CommandLineIndicatorRunner` to compute the Hypervolume value by normalizing first the fronts:
+```
+$ java org.uma.jmetal.qualityIndicator.CommandLineIndicatorRunner HV jmetal-problem/src/test/resources/pareto_fronts/ZDT2.pf FUN.tsv TRUE
+
+The fronts are NORMALIZED before computing the indicators
+0.32627228626895705
+```
+
+If we are interesting in computing all the quality indicators we execute the following command:
+```
+$ java org.uma.jmetal.qualityIndicator.CommandLineIndicatorRunner ALL jmetal-problem/src/test/resources/pareto_fronts/ZDT2.pf FUN.tsv TRUE
+
+The fronts are NORMALIZED before computing the indicators
+EP: 0.01141025767271403
+HV: 0.32627228626895705
+GD: 1.862557951719542E-4
+IGD: 1.8204928590462744E-4
+IGD+: 0.003435437983027875
+SPREAD: 0.33743702454536517
+GSPREAD: 0.40369897027563534
+R2: 0.19650995040071226
+ER: 1.0
+SC(refPF, front): 0.89
+SC(front, refPF): 0.0
+```
