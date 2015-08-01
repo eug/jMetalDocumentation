@@ -23,8 +23,8 @@ The idea is than every quality indicator is applied to some entity (`Evaluate`) 
 
 ### Auxiliary classes
 Before describing how quality indicators are implemented, we must comment before a number of auxiliary classes that are used:
-* The [`Front`](https://github.com/jMetal/jMetal/blob/master/jmetal-core/src/main/java/org/uma/jmetal/util/front/Front.java) interface and [`ArrayFront`](https://github.com/jMetal/jMetal/blob/master/jmetal-core/src/main/java/org/uma/jmetal/util/front/imp/ArrayFront.java) class: Frequently, a reference Pareto front is stored in a file containing the objective values of a number of solutions. A `Front` is an entity intended to store the contents of these files; in the case of the `ArrayFront` class, it stores the front into an array of points.
-* The [`FrontNormalizer`](https://github.com/jMetal/jMetal/blob/master/jmetal-core/src/main/java/org/uma/jmetal/util/front/util/FrontNormalizer.java) class: many indicators normalize the list of solutions to be evaluated, and this class is intended to do this: given a reference front or the maximum and minimum values, it returns a normalized list of solutions.
+* The [`Front`](https://github.com/jMetal/jMetal/blob/jmetal-5.0/jmetal-core/src/main/java/org/uma/jmetal/util/front/Front.java) interface and [`ArrayFront`](https://github.com/jMetal/jMetal/blob/jmetal-5.0/jmetal-core/src/main/java/org/uma/jmetal/util/front/imp/ArrayFront.java) class: Frequently, a reference Pareto front is stored in a file containing the objective values of a number of solutions. A `Front` is an entity intended to store the contents of these files; in the case of the `ArrayFront` class, it stores the front into an array of points.
+* The [`FrontNormalizer`](https://github.com/jMetal/jMetal/blob/jmetal-5.0/jmetal-core/src/main/java/org/uma/jmetal/util/front/util/FrontNormalizer.java) class: many indicators normalize the list of solutions to be evaluated, and this class is intended to do this: given a reference front or the maximum and minimum values, it returns a normalized list of solutions.
 
 ### An example of indicator: Epsilon
 
@@ -80,7 +80,7 @@ Then, the `evaluate` method computes the indicator value by using the reference 
   }
 ```
 
-Readers interested in how the Epsilon is computed can find all the code [here]( https://github.com/jMetal/jMetal/blob/master/jmetal-core/src/main/java/org/uma/jmetal/qualityindicator/impl/Epsilon.java)
+Readers interested in how the Epsilon is computed can find all the code [here]( https://github.com/jMetal/jMetal/blob/jmetal-5.0/jmetal-core/src/main/java/org/uma/jmetal/qualityindicator/impl/Epsilon.java)
 
 ### About normalization
 An important issue to take into account is that quality indicators do not normalize the solution list to be evaluated. Instead, the user can choose if the fronts are normalized or not before using them.
@@ -114,7 +114,7 @@ double hvValue = hypervolume.evaluate(population) ;
 Leaving the normalization up to the user can be error prone, but there is a performance advantage: if the same indicator has to be applied to many solution lists, the normalization of the reference front is carried out only once. This is the case, for example, when some indicator-based algorithms have to find the solution contributing the least to the Hypervolume.
 
 ### Computing quality indicators from the command line
-If you need to compute the value of a given quality indicator of a front of solutions from the command line you can use the [`CommandLineIndicatorRunner`](https://github.com/jMetal/jMetal/blob/master/jmetal-exec/src/main/java/org/uma/jmetal/qualityIndicator/CommandLineIndicatorRunner.java) class.
+If you need to compute the value of a given quality indicator of a front of solutions from the command line you can use the [`CommandLineIndicatorRunner`](https://github.com/jMetal/jMetal/blob/jmetal-5.0/jmetal-exec/src/main/java/org/uma/jmetal/qualityIndicator/CommandLineIndicatorRunner.java) class.
 
 The usage of this program is:
 ```
