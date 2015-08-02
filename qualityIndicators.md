@@ -132,7 +132,7 @@ where indicator name can be:
 * `ER`: Error ratio
 * `ALL`: Select all the available indicators
 
-The last parameter is used to indicate whether the fronts are to be normalized or not computing the quality indicators.
+The last parameter is used to indicate whether the fronts are to be normalized or not before computing the quality indicators.
 
 We include some examples next. First, we run NSGA-II to solve problem [`ZDT2`](https://github.com/jMetal/jMetal/blob/jmetal-5.0/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/zdt/ZDT2.java):
 ```
@@ -156,7 +156,7 @@ The fronts are NORMALIZED before computing the indicators
 0.32627228626895705
 ```
 
-If we are interesting in computing all the quality indicators we execute the following command:
+If we are interested in computing all the quality indicators, we execute the following command:
 ```
 $ java org.uma.jmetal.qualityIndicator.CommandLineIndicatorRunner ALL jmetal-problem/src/test/resources/pareto_fronts/ZDT2.pf FUN.tsv TRUE
 
