@@ -23,6 +23,6 @@ public interface Problem<S extends Solution<?>> extends Serializable {
   public S createSolution() ;
 ```
 
-The genetics `S` allows to determine the encoding of the solutions of the problem. This way, a problem must include a method for evaluating any solution of class `S` as well as providing a `createSolution()` method for creating a new solution. 
+The genetic type `S` allows to determine the encoding of the solutions of the problem. This way, a problem must include a method for evaluating any solution of class `S` as well as providing a `createSolution()` method for creating a new solution. 
 
 TO BE COMPLETED
