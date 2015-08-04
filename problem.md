@@ -148,4 +148,7 @@ public class Kursawe extends AbstractDoubleProblem {
 }
 ```
 
-Similarly to the `DoubleProblem` interface and `AbstractDoubleProblem`, we can found `BinaryProblem` and `AbstractBinaryProblem`, `IntegerProblem` and `AbstractIntegerProblem`, etc.
+Similarly to the `DoubleProblem` interface and `AbstractDoubleProblem`, we can found `BinaryProblem` and `AbstractBinaryProblem`, `IntegerProblem` and `AbstractIntegerProblem`, etc. The packages related to defining and implementing problems are:
+* [`org.uma.jmetal.problem` (module `jmetal-core`)](https://github.com/jMetal/jMetal/tree/jmetal-5.0/jmetal-core/src/main/java/org/uma/jmetal/problem): Interface definitions.
+* [`org.uma.jmetal.problem.imp` (module `jmetal-core`)](https://github.com/jMetal/jMetal/tree/jmetal-5.0/jmetal-core/src/main/java/org/uma/jmetal/problem.impl): Default implementations.
+* [`org.uma.jmetal.problem` (module `jmetal-problem`)](https://github.com/jMetal/jMetal/tree/jmetal-5.0/jmetal-problem/src/main/java/org/uma/jmetal/problem): Implemented problems.
