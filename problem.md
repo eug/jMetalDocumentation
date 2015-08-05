@@ -152,3 +152,27 @@ Similarly to the `DoubleProblem` interface and `AbstractDoubleProblem`, we can f
 * [`org.uma.jmetal.problem` (module `jmetal-core`)](https://github.com/jMetal/jMetal/tree/jmetal-5.0/jmetal-core/src/main/java/org/uma/jmetal/problem): Interface definitions.
 * [`org.uma.jmetal.problem.impl` (module `jmetal-core`)](https://github.com/jMetal/jMetal/tree/jmetal-5.0/jmetal-core/src/main/java/org/uma/jmetal/problem/impl): Default implementations.
 * [`org.uma.jmetal.problem` (module `jmetal-problem`)](https://github.com/jMetal/jMetal/tree/jmetal-5.0/jmetal-problem/src/main/java/org/uma/jmetal/problem): Implemented problems.
+
+### Constrained problems
+There are two ways of dealing with constrained problems in jMetal 5. The first choice is to include the code to deal with constraint violation in the `evaluate()` method; the second one is to implement the [`ConstrainedProblem`](https://github.com/jMetal/jMetal/blob/jmetal-5.0/jmetal-core/src/main/java/org/uma/jmetal/problem/ConstrainedProblem.java) interface which includes a method for evaluating constraints:
+
+```java
+package org.uma.jmetal.problem;
+
+/**
+ * Interface representing problems having constraints
+ *
+ * @author Antonio J. Nebro <antonio@lcc.uma.es>
+ */
+public interface ConstrainedProblem<S extends Solution<?>> extends Problem<S> {
+
+ /* Getters */
+  public int getNumberOfConstraints() ;
+	
+  /* Methods */
+  public void evaluateConstraints(S solution) ;
+}
+```
+In jMetal 5 we prefer the second approach, ...
+
+TO BE COMPLETED
