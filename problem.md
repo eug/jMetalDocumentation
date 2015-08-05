@@ -51,15 +51,15 @@ public abstract class AbstractDoubleProblem extends AbstractGenericProblem<Doubl
   private List<Double> upperLimit ;
 
   /* Getters */
-	@Override
-	public Double getUpperBound(int index) {
-		return upperLimit.get(index);
-	}
+  @Override
+  public Double getUpperBound(int index) {
+    return upperLimit.get(index);
+  }
 
-	@Override
-	public Double getLowerBound(int index) {
-		return lowerLimit.get(index);
-	}
+  @Override
+  public Double getLowerBound(int index) {
+    return lowerLimit.get(index);
+  }
 
   /* Setters */
   protected void setLowerLimit(List<Double> lowerLimit) {
@@ -77,7 +77,7 @@ public abstract class AbstractDoubleProblem extends AbstractGenericProblem<Doubl
 }
 ```
 
-As an example of double problem, we include next the implementation of the known [`Kursawe`]() problem:
+As an example of double problem, we include next the implementation of the known [`Kursawe`](https://github.com/jMetal/jMetal/blob/jmetal-5.0/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/Kursawe.java) problem:
 ```java
 package org.uma.jmetal.problem.multiobjective;
 
@@ -173,6 +173,10 @@ public interface ConstrainedProblem<S extends Solution<?>> extends Problem<S> {
   public void evaluateConstraints(S solution) ;
 }
 ```
-In jMetal 5 we prefer the second approach, ...
+In jMetal 5 the default approach is the second one. The following code contains the implementation of the [`Tanaka`](https://github.com/jMetal/jMetal/blob/jmetal-5.0/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/Tanaka.java) problem:
+```java
+
+```
+
 
 TO BE COMPLETED
