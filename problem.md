@@ -173,10 +173,87 @@ public interface ConstrainedProblem<S extends Solution<?>> extends Problem<S> {
   public void evaluateConstraints(S solution) ;
 }
 ```
-In jMetal 5 the default approach is the second one. The following code contains the implementation of the [`Tanaka`](https://github.com/jMetal/jMetal/blob/jmetal-5.0/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/Tanaka.java) problem:
+In jMetal 5 the default approach is the second one. The following code contains the implementation of the [`Tanaka`](https://github.com/jMetal/jMetal/blob/jmetal-5.0/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/Tanaka.java) problem, which has two constraints:
 ```java
+package org.uma.jmetal.problem.multiobjective;
+
+/**
+ * Class representing problem Tanaka
+ */
+public class Tanaka extends AbstractDoubleProblem implements ConstrainedProblem<DoubleSolution> {
+  public OverallConstraintViolation<DoubleSolution> overallConstraintViolationDegree ;
+  public NumberOfViolatedConstraints<DoubleSolution> numberOfViolatedConstraints ;
+
+  /**
+   * Constructor.
+   * Creates a default instance of the problem Tanaka
+   */
+  public Tanaka() {
+    setNumberOfVariables(2);
+    setNumberOfObjectives(2);
+    setNumberOfConstraints(2);
+    setName("Tanaka") ;
+
+    List<Double> lowerLimit = new ArrayList<>(getNumberOfVariables()) ;
+    List<Double> upperLimit = new ArrayList<>(getNumberOfVariables()) ;
+
+    for (int i = 0; i < getNumberOfVariables(); i++) {
+      lowerLimit.add(10e-5);
+      upperLimit.add(Math.PI);
+    }
+
+    setLowerLimit(lowerLimit);
+    setUpperLimit(upperLimit);
+
+    overallConstraintViolationDegree = new OverallConstraintViolation<DoubleSolution>() ;
+    numberOfViolatedConstraints = new NumberOfViolatedConstraints<DoubleSolution>() ;
+  }
+
+  @Override
+  public void evaluate(DoubleSolution solution)  {
+    solution.setObjective(0, solution.getVariableValue(0));
+    solution.setObjective(1, solution.getVariableValue(1));
+  }
+
+  /** EvaluateConstraints() method */
+  @Override
+  public void evaluateConstraints(DoubleSolution solution)  {
+    double[] constraint = new double[this.getNumberOfConstraints()];
+
+    double x1 = solution.getVariableValue(0) ;
+    double x2 = solution.getVariableValue(1) ;
+
+    constraint[0] = (x1 * x1 + x2 * x2 - 1.0 - 0.1 * Math.cos(16.0 * Math.atan(x1 / x2)));
+    constraint[1] = -2.0 * ((x1 - 0.5) * (x1 - 0.5) + (x2 - 0.5) * (x2 - 0.5) - 0.5);
+
+    double overallConstraintViolation = 0.0;
+    int violatedConstraints = 0;
+    for (int i = 0; i < getNumberOfConstraints(); i++) {
+      if (constraint[i]<0.0){
+        overallConstraintViolation+=constraint[i];
+        violatedConstraints++;
+      }
+    }
+
+    overallConstraintViolationDegree.setAttribute(solution, overallConstraintViolation);
+    numberOfViolatedConstraints.setAttribute(solution, violatedConstraints);
+  }
+}
 
 ```
+### Discusion
+The inclusion of the `ConstrainedProblem` interface was motivated by the former jMetal versions, where every problem had the `evaluate()` and `evaluateConstraints()` methods. In the case of a non-constrained problem, `evaluateConstraints()` was implemented as an empty method. To avoid this violation of the [Interface Segregation Principle](https://en.wikipedia.org/wiki/Interface_segregation_principle), in jMetal 5 only those problems having side constraints need to evaluate constraints.
+
+In the original jMetal, evauating a solution needed two sentences:
+```java
+Problem problem ;
+Solution solution ;
+...
+problem.evaluate(solution) ;
+problem.evaluateContraints(solution) ;
+```
+
+Now a check has to be included to determine whether a problem has constraints or not:
 
 
 TO BE COMPLETED
