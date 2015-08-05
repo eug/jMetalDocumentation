@@ -244,7 +244,7 @@ public class Tanaka extends AbstractDoubleProblem implements ConstrainedProblem<
 ### Discusion
 The inclusion of the `ConstrainedProblem` interface was motivated by the former jMetal versions, where every problem had the `evaluate()` and `evaluateConstraints()` methods. In the case of a non-constrained problem, `evaluateConstraints()` was implemented as an empty method. To avoid this violation of the [Interface Segregation Principle](https://en.wikipedia.org/wiki/Interface_segregation_principle), in jMetal 5 only those problems having side constraints need to evaluate constraints.
 
-In the original jMetal, evauating a solution needed two sentences:
+In the original jMetal, evaluating a solution needed two sentences:
 ```java
 Problem problem ;
 Solution solution ;
@@ -254,6 +254,12 @@ problem.evaluateContraints(solution) ;
 ```
 
 Now a check has to be included to determine whether a problem has constraints or not:
+```java
+DoubleProblem problem ;
+DoubleSolution solution ;
 
-
-TO BE COMPLETED
+problem.evaluate(solution);
+if (problem instanceof ConstrainedProblem) {
+  ((ConstrainedProblem<DoubleSolution>) problem).evaluateConstraints(solutionn);
+}
+```
