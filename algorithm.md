@@ -17,7 +17,7 @@ public interface Algorithm<Result> extends Runnable {
 
 ```
 This interface is very generic: it specifies that an algorithm must have a `run()` method and return a result by the `getResult()` method. As it extends `Runnable`, any algorithm can be executed in a thread.
-
+ 
 
 
 TO BE COMPLETED
