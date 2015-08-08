@@ -5,10 +5,13 @@ Most of metaheuristic families are characterized by a common behaviour which is 
 ### The Evolutionary Algorithm Template
 Many papers about evolutionary algorithms (EAs) include a pseudo-code to describe them similar to this one:  
 ```
-P(0) ← GenerateInitialSolutions() t ← 0
+P(0) ← GenerateInitialSolutions() 
+t ← 0
 Evaluate(P(0))
 while not StoppingCriterion() do
-  Q(t) ← Variation(P(t)) Evaluate(Q(t))
-  P (t + 1) ← Update(P (t), Q(t)) t←t+1
+  Q(t) ← Variation(P(t)) 
+  Evaluate(Q(t))
+  P (t + 1) ← Update(P (t), Q(t)) 
+  t←t+1
 end while
 ```
