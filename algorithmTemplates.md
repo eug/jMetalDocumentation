@@ -71,6 +71,9 @@ To develop an EA, all the abstract the methods used in the `run()` method must b
 * `isStoppingConditionReached()`: the stopping condition establishes when the algorithm finishes its execution.
 * `selection(population)`: the selection method chooses a number of solutions from the population to become the mating pool.
 * `reproduction(matingPopulation)`: the solutions in the mating pool are manipulated somehow, by modifying them or using them to create new ones, yielding to new solutions that constitute the offspring population.
-* `replacement(population, offspringPopulation)`: the 
+* `replacement(population, offspringPopulation)`: the population for the next generation is built from individuals of the current and the offspring populations.
+* `updateProgress()`: the counter of the progress of the algorithm (evaluations, iterations, or whatever) is updated.
+
+If we are dealing with a genetic algorithm, ...
 
 TO BE COMPLETED
