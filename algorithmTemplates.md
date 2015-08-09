@@ -103,6 +103,6 @@ public abstract class AbstractEvolutionStrategy<S extends Solution<?>, Result> e
   protected MutationOperator<S> mutationOperator ;
 }
 ```
-The [PAES](https://github.com/jMetal/jMetal/blob/jmetal-5.0/jmetal-algorithm/src/main/java/org/uma/jmetal/algorithm/multiobjective/paes/PAES.java) is based on this template
+The [PAES](https://github.com/jMetal/jMetal/blob/jmetal-5.0/jmetal-algorithm/src/main/java/org/uma/jmetal/algorithm/multiobjective/paes/PAES.java) algorithm is based on this template
 
 TO BE COMPLETED
