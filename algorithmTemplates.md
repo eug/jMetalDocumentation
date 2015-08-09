@@ -67,6 +67,10 @@ The generics in the class declaration indicate that an algorithm works with subc
 To develop an EA, all the abstract the methods used in the `run()` method must be implemented. We describe those methods next:
 * `createInitialPopulation()`: This method fills the population with a set of tentative solutions. The typical strategy consists in generating randomly initialized solutions, but any other approach can be applied.
 * `evaluatePopulation(population)`: All the solutions in the `population` argument are evaluated and a population, which can be the same one passed as a parameter or a new one) is returned as a result.
-* `initProgress()`: ....
+* `initProgress()`: The progress of an EA is usually measured by counting iterations or function evaluations. This method initializes the progess counter.
+* `isStoppingConditionReached()`: the stopping condition establishes when the algorithm finishes its execution.
+* `selection(population)`: the selection method chooses a number of solutions from the population to become the mating pool.
+* `reproduction(matingPopulation)`: the solutions in the mating pool are manipulated somehow, by modifying them or using them to create new ones, yielding to new solutions that constitute the offspring population.
+* `replacement(population, offspringPopulation)`: the 
 
 TO BE COMPLETED
