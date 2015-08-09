@@ -90,4 +90,19 @@ public abstract class AbstractGeneticAlgorithm<S extends Solution<?>, Result> ex
 ```
 Popular metaheuristics such as [NSGA-II](https://github.com/jMetal/jMetal/blob/jmetal-5.0/jmetal-algorithm/src/main/java/org/uma/jmetal/algorithm/multiobjective/nsgaii/NSGAII.java), [SPEA2](https://github.com/jMetal/jMetal/blob/jmetal-5.0/jmetal-algorithm/src/main/java/org/uma/jmetal/algorithm/multiobjective/spea2/SPEA2.java), [PESA2](https://github.com/jMetal/jMetal/blob/jmetal-5.0/jmetal-algorithm/src/main/java/org/uma/jmetal/algorithm/multiobjective/pesa2/PESA2.java), [MOCell](https://github.com/jMetal/jMetal/blob/jmetal-5.0/jmetal-algorithm/src/main/java/org/uma/jmetal/algorithm/multiobjective/nsgaii/NSGAII.java) or [SMS-EMOA](https://github.com/jMetal/jMetal/blob/jmetal-5.0/jmetal-algorithm/src/main/java/org/uma/jmetal/algorithm/multiobjective/smsemoa/SMSEMOA.java) are based on this template.
 
+#### Evolution strategies
+Another subfamily of EAs are evolution strategies, which are based on applying only mutation in the reproduction step. The corresponding abstract class for EAs is [`AbstractEvolutionStragegy`](https://github.com/jMetal/jMetal/blob/master/jmetal-core/src/main/java/org/uma/jmetal/algorithm/impl/AbstractEvolutionStrategy.java):
+
+```java
+package org.uma.jmetal.algorithm.impl;
+
+/**
+ * Created by ajnebro on 26/10/14.
+ */
+public abstract class AbstractEvolutionStrategy<S extends Solution<?>, Result> extends AbstractEvolutionaryAlgorithm<S, Result> {
+  protected MutationOperator<S> mutationOperator ;
+}
+```
+The [PAES](https://github.com/jMetal/jMetal/blob/jmetal-5.0/jmetal-algorithm/src/main/java/org/uma/jmetal/algorithm/multiobjective/paes/PAES.java) is based on this template
+
 TO BE COMPLETED
