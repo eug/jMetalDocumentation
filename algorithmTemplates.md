@@ -75,7 +75,7 @@ To develop an EA, all the abstract the methods used in the `run()` method must b
 * `updateProgress()`: the counter of the progress of the algorithm (evaluations, iterations, or whatever) is updated.
 
 #### Genetic algorithms 
-If we are dealing with a genetic algorithm, a subfamily of EAs characterized by applying a selection operator and by using a crossover and a mutation operator for the reproduction step, a subclass of `AbstractEvolutionaryAlgorithm` called [AbstractGeneticAlgorithm](https://github.com/jMetal/jMetal/blob/master/jmetal-core/src/main/java/org/uma/jmetal/algorithm/impl/AbstractGeneticAlgorithm.java) is provided:
+If we are interested in implementing a genetic algorithm, a subfamily of EAs characterized by applying a selection operator and by using a crossover and a mutation operator for the reproduction step, a subclass of `AbstractEvolutionaryAlgorithm` called [AbstractGeneticAlgorithm](https://github.com/jMetal/jMetal/blob/master/jmetal-core/src/main/java/org/uma/jmetal/algorithm/impl/AbstractGeneticAlgorithm.java) is provided:
 ```java
 package org.uma.jmetal.algorithm.impl;
 
@@ -88,5 +88,6 @@ public abstract class AbstractGeneticAlgorithm<S extends Solution<?>, Result> ex
   protected MutationOperator<S> mutationOperator ;
 }
 ```
+Popular metaheuristics such as [NSGA-II](https://github.com/jMetal/jMetal/blob/jmetal-5.0/jmetal-algorithm/src/main/java/org/uma/jmetal/algorithm/multiobjective/nsgaii/NSGAII.java), [SPEA2](https://github.com/jMetal/jMetal/blob/jmetal-5.0/jmetal-algorithm/src/main/java/org/uma/jmetal/algorithm/multiobjective/spea2/SPEA2.java), [PESA2](https://github.com/jMetal/jMetal/blob/jmetal-5.0/jmetal-algorithm/src/main/java/org/uma/jmetal/algorithm/multiobjective/pesa2/PESA2.java), [MOCell](https://github.com/jMetal/jMetal/blob/jmetal-5.0/jmetal-algorithm/src/main/java/org/uma/jmetal/algorithm/multiobjective/nsgaii/NSGAII.java) or [SMS-EMOA](https://github.com/jMetal/jMetal/blob/jmetal-5.0/jmetal-algorithm/src/main/java/org/uma/jmetal/algorithm/multiobjective/smsemoa/SMSEMOA.java) are based on this template.
 
 TO BE COMPLETED
