@@ -70,10 +70,23 @@ To develop an EA, all the abstract the methods used in the `run()` method must b
 * `initProgress()`: The progress of an EA is usually measured by counting iterations or function evaluations. This method initializes the progess counter.
 * `isStoppingConditionReached()`: the stopping condition establishes when the algorithm finishes its execution.
 * `selection(population)`: the selection method chooses a number of solutions from the population to become the mating pool.
-* `reproduction(matingPopulation)`: the solutions in the mating pool are manipulated somehow, by modifying them or using them to create new ones, yielding to new solutions that constitute the offspring population.
+* `reproduction(matingPopulation)`: the solutions in the mating pool are manipulated somehow, by modifying them or by using them to create new ones, yielding to new solutions that constitute the offspring population.
 * `replacement(population, offspringPopulation)`: the population for the next generation is built from individuals of the current and the offspring populations.
 * `updateProgress()`: the counter of the progress of the algorithm (evaluations, iterations, or whatever) is updated.
 
-If we are dealing with a genetic algorithm, ...
+#### Genetic algorithms 
+If we are dealing with a genetic algorithm, a subfamily of EAs characterized by applying a selection operator and by using a crossover and a mutation operator for the reproduction step, a subclass of `AbstractEvolutionaryAlgorithm` called [AbstractGeneticAlgorithm](https://github.com/jMetal/jMetal/blob/master/jmetal-core/src/main/java/org/uma/jmetal/algorithm/impl/AbstractGeneticAlgorithm.java) is provided:
+```java
+package org.uma.jmetal.algorithm.impl;
+
+/**
+ * Created by ajnebro on 26/10/14.
+ */
+public abstract class AbstractGeneticAlgorithm<S extends Solution<?>, Result> extends AbstractEvolutionaryAlgorithm<S, Result> {
+  protected SelectionOperator<List<S>, S> selectionOperator ;
+  protected CrossoverOperator<S> crossoverOperator ;
+  protected MutationOperator<S> mutationOperator ;
+}
+```
 
 TO BE COMPLETED
