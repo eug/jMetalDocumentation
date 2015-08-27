@@ -49,5 +49,8 @@ public class NSGAII<S extends Solution<?>> extends AbstractGeneticAlgorithm<S, L
    ...
 }
 ```
-which indicates that it extends the [`AbstractGeneticAlgorithm`]
+which indicates that it extends the [`AbstractGeneticAlgorithm`](https://github.com/jMetal/jMetal/blob/jmetal-5.0/jmetal-core/src/main/java/org/uma/jmetal/algorithm/impl/AbstractGeneticAlgorithm.java)
+
+...
+
 TO BE COMPLETED
