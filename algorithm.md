@@ -22,5 +22,32 @@ The symplicity of `Algorithm` offers plenty of freedom to implement a metaheuris
 
 ### Case study: NSGA-II
 
+NSGA-II is a genetic algorithm (GA), i.e. it belongs to the evolutionary algorithms (EAs) family. The implementation of NSGA-II provided in jMetal 5.0 follows the evolutionary algorithm template described in the [algorithm templates](https://github.com/jMetal/jMetalDocumentation/blob/master/algorithmTemplates.md) section of the documentation. This means that it must define the methods of the [`AbstractEvolutionaryAlgorithm`](https://github.com/jMetal/jMetal/blob/jmetal-5.0/jmetal-core/src/main/java/org/uma/jmetal/algorithm/impl/AbstractEvolutionaryAlgorithm.java) class. According to this template, the flow control of the algorithm is defined in the `run()` method:
+```java
+@Override public void run() {
+    List<S> offspringPopulation;
+    List<S> matingPopulation;
 
+    population = createInitialPopulation();
+    population = evaluatePopulation(population);
+    initProgress();
+    while (!isStoppingConditionReached()) {
+      matingPopulation = selection(population);
+      offspringPopulation = reproduction(matingPopulation);
+      offspringPopulation = evaluatePopulation(offspringPopulation);
+      population = replacement(population, offspringPopulation);
+      updateProgress();
+    }
+  }
+  ```
+
+We describe next how these methods are implemented in the [NSGAII](https://github.com/jMetal/jMetal/blob/jmetal-5.0/jmetal-algorithm/src/main/java/org/uma/jmetal/algorithm/multiobjective/nsgaii/NSGAII.java) class.
+
+The class declaration is as follows:
+```java
+public class NSGAII<S extends Solution<?>> extends AbstractGeneticAlgorithm<S, List<S>> {
+   ...
+}
+```
+which indicates that it extends the [`AbstractGeneticAlgorithm`]
 TO BE COMPLETED
