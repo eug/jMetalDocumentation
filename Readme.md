@@ -17,7 +17,7 @@ This site contains documentation of the latest version of jMetal (version 5.0), 
  4. [The `Algorithm` interface](algorithm.md)
 4. Peripheral architecture
  1. [Measures](measures.md)
- 2. [Evalutors](evaluators.md)
+ 2. [Evaluators](evaluators.md)
 5. [Algorithm templates](algorithmTemplates.md)
 6. [Quality indicators](qualityIndicators.md)
 7. [Javadoc](http://jmetal.github.io/jMetal/apidocs/index.html)
