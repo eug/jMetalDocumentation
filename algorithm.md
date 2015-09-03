@@ -72,7 +72,7 @@ The constructor parameter contains:
 * The problem to solve.
 * The main algorithm parameters: the population size and the maximum number of iterations.
 * The genetic operators: crossover, mutation, and selection.
-* An evaluator object to evaluate the solutions in the population.
+* An [evaluator](https://github.com/jMetal/jMetalDocumentation/blob/master/evaluators.md) object to evaluate the solutions in the population.
 
 We can observe that all the parameters depend on `S`. This way, if `S` is instantiated e.g. as [`DoubleSolution`](https://github.com/jMetal/jMetal/blob/jmetal-5.0/jmetal-core/src/main/java/org/uma/jmetal/solution/DoubleSolution.java), then the problems to be solved must extend `Problem<DoubleSolution>` and all the operators must manipulate `DoubleSolution` objects. 
 
