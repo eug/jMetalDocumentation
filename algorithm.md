@@ -74,8 +74,56 @@ The constructor parameter contains:
 * The genetic operators: crossover, mutation, and selection.
 * An [evaluator](https://github.com/jMetal/jMetalDocumentation/blob/master/evaluators.md) object to evaluate the solutions in the population.
 
-We can observe that all the parameters depend on `S`. This way, if `S` is instantiated e.g. to [`DoubleSolution`](https://github.com/jMetal/jMetal/blob/jmetal-5.0/jmetal-core/src/main/java/org/uma/jmetal/solution/DoubleSolution.java), then the problems to be solved must extend `Problem<DoubleSolution>` and all the operators must manipulate `DoubleSolution` objects. 
+We can observe that all the parameters depend on `S`. This way, if `S` is instantiated e.g. to [`DoubleSolution`](https://github.com/jMetal/jMetal/blob/jmetal-5.0/jmetal-core/src/main/java/org/uma/jmetal/solution/DoubleSolution.java), then the problems to be solved must extend `Problem<DoubleSolution>` and all the operators must manipulate `DoubleSolution` objects. The interesting point of this approch is the compiler can ensure that there are no errors related with the application of wrong operators to a given solution.
 
-...
+The default `createInitialPopulation()` method adds a number of `populationSize` new solutions to a list:
+
+```java
+  @Override protected List<S> createInitialPopulation() {
+    List<S> population = new ArrayList<>(populationSize);
+    for (int i = 0; i < populationSize; i++) {
+      S newIndividual = problem.createSolution();
+      population.add(newIndividual);
+    }
+    return population;
+  }
+```
+
+The evalution of lists of solutions are delegated to `Evaluator` objects, so the `evaluatePopulation()` method is very simple:
+
+```java
+  @Override protected List<S> evaluatePopulation(List<S> population) {
+    population = evaluator.evaluate(population, problem);
+
+    return population;
+  }
+```
+
+The NSGA-II implementation assumes that the stopping condition will be defined around a maximum number of iterations:
+
+```java
+  @Override protected boolean isStoppingConditionReached() {
+    return iterations >= maxIterations;
+  }
+```
+
+so the `initProgress()` method initalizes the iteration counter (the initial value is 1 because it is assumed that the initial populatio has been already evaluated):
+
+```java
+  @Override protected void initProgress() {
+    iterations = 1;
+  }
+```
+
+and the `updateProgress()` method merely increments the counter:
+
+```java
+  @Override protected void updateProgress() {
+    iterations++;
+  }
+
+```
+
+
 
 TO BE COMPLETED
