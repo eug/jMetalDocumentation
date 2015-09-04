@@ -124,6 +124,41 @@ and the `updateProgress()` method merely increments the counter:
 
 ```
 
+Accordig to the EA template, the `Selection()` method must create a mating pool from the population, so it is implemented this way:
+
+```java
+  @Override protected List<S> selection(List<S> population) {
+    List<S> matingPopulation = new ArrayList<>(population.size());
+    for (int i = 0; i < populationSize; i++) {
+      S solution = selectionOperator.execute(population);
+      matingPopulation.add(solution);
+    }
+
+    return matingPopulation;
+  }
+```
+
+and the `reproduction()` method applies the crossover and mutation operators to the mating population, leading to new individuals that are added to an offspring population:
+
+```java
+  @Override protected List<S> reproduction(List<S> population) {
+    List<S> offspringPopulation = new ArrayList<>(populationSize);
+    for (int i = 0; i < populationSize; i += 2) {
+      List<S> parents = new ArrayList<>(2);
+      parents.add(population.get(i));
+      parents.add(population.get(i + 1));
+
+      List<S> offspring = crossoverOperator.execute(parents);
+
+      mutationOperator.execute(offspring.get(0));
+      mutationOperator.execute(offspring.get(1));
+
+      offspringPopulation.add(offspring.get(0));
+      offspringPopulation.add(offspring.get(1));
+    }
+    return offspringPopulation;
+  }
+```
 
 
 TO BE COMPLETED
