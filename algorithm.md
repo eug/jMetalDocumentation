@@ -159,6 +159,71 @@ and the `reproduction()` method applies the crossover and mutation operators to 
     return offspringPopulation;
   }
 ```
+Finally, the `replacement()` method joins the current and offspring populations to produce the population of the next generation by applying the ranking and crowding distance selection:
+
+```java
+  @Override protected List<S> replacement(List<S> population, List<S> offspringPopulation) {
+    List<S> jointPopulation = new ArrayList<>();
+    jointPopulation.addAll(population);
+    jointPopulation.addAll(offspringPopulation);
+
+    Ranking<S> ranking = computeRanking(jointPopulation);
+
+    return crowdingDistanceSelection(ranking);
+  }
+```
+
+### Case study: Steady-state NSGA-II
+An advantage of using the EA template to implement NSGA-II is that it allows to simplify the implementation of variants of the algorithm. To give an example, we describe here the [SteadyStateNSGAII](https://github.com/jMetal/jMetal/blob/jmetal-5.0/jmetal-algorithm/src/main/java/org/uma/jmetal/algorithm/multiobjective/nsgaii/SteadyStateNSGAII.java) class, which implements a steady-state version of NSGA-II. This version is basically NSGA-II but with an auxiliar population of size 1, so the `SteadyStateNSGAII` is an extension of class [`NSGAII`](https://github.com/jMetal/jMetal/blob/jmetal-5.0/jmetal-algorithm/src/main/java/org/uma/jmetal/algorithm/multiobjective/nsgaii/NSGAII.java):
+
+```java
+public class SteadyStateNSGAII<S extends Solution<?>> extends NSGAII<S> {
+}
+```
+
+and the class constructor is similar to the one of NSGA-II:
+
+``` java
+  public SteadyStateNSGAII(Problem<S> problem, int maxIterations, int populationSize,
+      CrossoverOperator<S> crossoverOperator, MutationOperator<S> mutationOperator,
+      SelectionOperator<List<S>, S> selectionOperator, SolutionListEvaluator<S> evaluator) {
+    super(problem, maxIterations, populationSize, crossoverOperator, mutationOperator,
+        selectionOperator, evaluator);
+  }
+```
+
+The only differences between the two algorithm variants are in the `selection()` (the mating pool is composed of two parents) and `reproduction()`(only a child is generated) methods:
+
+```java
+  @Override protected List<S> selection(List<S> population) {
+    List<S> matingPopulation = new ArrayList<>(2);
+
+    matingPopulation.add(selectionOperator.execute(population));
+    matingPopulation.add(selectionOperator.execute(population));
+
+    return matingPopulation;
+  }
+
+  @Override protected List<S> reproduction(List<S> population) {
+    List<S> offspringPopulation = new ArrayList<>(1);
+
+    List<S> parents = new ArrayList<>(2);
+    parents.add(population.get(0));
+    parents.add(population.get(1));
+
+    List<S> offspring = crossoverOperator.execute(parents);
+
+    mutationOperator.execute(offspring.get(0));
+
+    offspringPopulation.add(offspring.get(0));
+    return offspringPopulation;
+  }
+```
+
+This way, most of the code of the `NSGAII` class is reused and only two methods have had to be redefined.
+
+### Using the builder pattern to configure NSGA-II
+To configure the algorithms in jMetal 5 we have adopted the approach of using the builder pattern, which is represented by the [`AlgorithmBuilder`](https://github.com/jMetal/jMetal/blob/jmetal-5.0/jmetal-core/src/main/java/org/uma/jmetal/util/AlgorithmBuilder.java) interface.
 
 
 TO BE COMPLETED
