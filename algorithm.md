@@ -223,7 +223,20 @@ The only differences between the two algorithm variants are in the `selection()`
 This way, most of the code of the `NSGAII` class is reused and only two methods have had to be redefined.
 
 ### Using the builder pattern to configure NSGA-II
-To configure the algorithms in jMetal 5 we have adopted the approach of using the builder pattern, which is represented by the [`AlgorithmBuilder`](https://github.com/jMetal/jMetal/blob/jmetal-5.0/jmetal-core/src/main/java/org/uma/jmetal/util/AlgorithmBuilder.java) interface.
+To configure the algorithms in jMetal 5 we have adopted the approach of using the builder pattern, which is represented by the [`AlgorithmBuilder`](https://github.com/jMetal/jMetal/blob/jmetal-5.0/jmetal-core/src/main/java/org/uma/jmetal/util/AlgorithmBuilder.java) interface:
+
+```java
+/**
+ * Interface representing algorithm builders
+ *
+ * @author Antonio J. Nebro <antonio@lcc.uma.es>
+ */
+public interface AlgorithmBuilder<A extends Algorithm<?>> {
+  public A build() ;
+}
+```
+
+
 
 
 TO BE COMPLETED
