@@ -2,7 +2,7 @@
 Metaheuristic techniques are based on modifying or generating new solutions from existing ones by
 means of the application of different operators. For example, EAs make use of crossover, mutation, and
 selection operators for modifying solutions. In jMetal, any operation altering or generating solutions (or
-sets of them) immplemnts or extends the `Operator` interface:
+sets of them) implements or extends the `Operator` interface:
 
 ``` java
 package org.uma.jmetal.operator;
@@ -55,7 +55,7 @@ package org.uma.jmetal.operator;
 public interface CrossoverOperator<S extends Solution<?>> extends Operator<List<S>,List<S>> {
 }
 ```
-This interface simply states that a crossover has as a source a list of `Solution` objects and return as a result another list of solutions. Let us examine two implementations of this interface, one for double solutons and another one for binary solutions. 
+This interface simply states that a crossover has as a source, a list of `Solution` objects and return as a result another list of solutions. Let us examine two implementations of this interface, one for double solutons and another one for binary solutions. 
 
 The simulated binary crossover (SBX) is the default crossover operator in many multiobjective evolutionary algorithms (e.g., NSGA-II, SPEA2, SMS-EMOA, MOCell, etc). A scheme of the `SBXCrossover` class is shown next:
 ```java
